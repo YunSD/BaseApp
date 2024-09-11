@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace MaterialDemo.Controls;
+namespace BaseApp.Resource.Controls;
 
 public partial class WaitingDialog : UserControl
 {

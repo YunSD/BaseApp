@@ -1,5 +1,5 @@
 ﻿using BaseApp.Core.Domain;
-using BaseApp.Enums;
+using BaseApp.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseApp.Core.Db

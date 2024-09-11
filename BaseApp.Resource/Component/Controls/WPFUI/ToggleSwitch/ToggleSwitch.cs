@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.ComponentModel;
+using System.Windows;
 
 namespace Wpf.Ui.Controls;
 

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace MaterialDemo.Controls;
+namespace BaseApp.Resource.Controls;
 
 /// <summary>
 /// Interaction logic for SampleDialog.xaml

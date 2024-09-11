@@ -1,6 +1,8 @@
 ﻿using HandyControl.Controls;
 using log4net;
+using MaterialDesignThemes.Wpf;
 using System.IO;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Wpf.Ui.Controls;

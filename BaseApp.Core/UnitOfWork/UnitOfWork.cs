@@ -15,6 +15,7 @@ namespace BaseApp.Core.UnitOfWork
     public class UnitOfWork<TContext> : IRepositoryFactory, IUnitOfWork<TContext>, IUnitOfWork where TContext : DbContext
     {
         private readonly TContext _context;
+        private readonly IServiceProvider serviceProvider;
         private bool disposed = false;
         private Dictionary<Type, object> repositories;
 
@@ -80,7 +81,7 @@ namespace BaseApp.Core.UnitOfWork
             // what's the best way to support custom reposity?
             if (hasCustomRepository)
             {
-                var customRepo = App.GetService<IRepository<TEntity>>();
+                var customRepo = serviceProvider.GetService<IRepository<TEntity>>();
                 if (customRepo != null)
                 {
                     return customRepo;

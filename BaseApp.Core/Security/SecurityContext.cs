@@ -1,4 +1,5 @@
-﻿using BaseApp.Core.Security.Messages;
+﻿using BaseApp.Core.Security;
+using BaseApp.Core.Security.Messages;
 using CommunityToolkit.Mvvm.Messaging;
 
 namespace BaseApp.Security

@@ -1,5 +1,5 @@
 ﻿
-using BaseApp.UnitOfWork.Collections;
+using BaseApp.Core.UnitOfWork.Collections;
 
 namespace BaseApp.Core.Domain
 {

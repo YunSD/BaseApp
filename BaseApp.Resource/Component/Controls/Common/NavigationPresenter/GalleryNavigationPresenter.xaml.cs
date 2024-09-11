@@ -3,9 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows;
 using Wpf.Ui;
 
-namespace MaterialDemo.Controls;
+namespace BaseApp.Resource.Controls;
 
 public class GalleryNavigationPresenter : System.Windows.Controls.Control
 {

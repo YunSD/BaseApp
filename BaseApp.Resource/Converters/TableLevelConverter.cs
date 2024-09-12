@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace MaterialDemo.Resource.Converters
+namespace BaseApp.Resource.Converters
 {
     public class TableLevelConverter : IValueConverter
     {

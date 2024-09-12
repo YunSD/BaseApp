@@ -1,10 +1,10 @@
-﻿using MaterialDemo.Domain;
+﻿using BaseApp.Upms.ViewModels.Upms.VO;
+using MaterialDemo.Domain;
 using MaterialDemo.Domain.Models.Entity;
 using MaterialDemo.Utils;
-using MaterialDemo.ViewModels.Pages.Upms.VObject;
 using System.ComponentModel.DataAnnotations;
 
-namespace MaterialDemo.ViewModels.Pages.Upms
+namespace BaseApp.Upms.ViewModels.Upms
 {
     public partial class MenuEditorViewModel : ObservableValidator
     {
@@ -48,7 +48,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
 
         public MenuEditorViewModel(SysMenuViewInfo entity, IList<SysMenuViewInfo> sysMenuVOs, FormSubmitEventHandler<SysMenu> submitEvent)
         {
-            this.SubmitEvent = submitEvent;
+            SubmitEvent = submitEvent;
             this.entity = entity;
 
             if (entity.MenuId.HasValue)
@@ -74,13 +74,13 @@ namespace MaterialDemo.ViewModels.Pages.Upms
 
             if (HasErrors) return;
 
-            this.entity.ParentId = ParentId == null ? 0 : ParentId;
-            this.entity.Name = Name;
-            this.entity.Icon = Icon;
-            this.entity.Router = Router;
-            this.entity.Position = Position;
-            this.entity.Seq = Seq;
-            this.entity.Remark = Remark;
+            entity.ParentId = ParentId == null ? 0 : ParentId;
+            entity.Name = Name;
+            entity.Icon = Icon;
+            entity.Router = Router;
+            entity.Position = Position;
+            entity.Seq = Seq;
+            entity.Remark = Remark;
             SubmitEvent(entity);
         }
     }

@@ -1,9 +1,7 @@
-﻿using MaterialDemo.Domain.Models.Entity;
-using MaterialDemo.Utils;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace MaterialDemo.ViewModels.Pages.Upms.VObject
+namespace BaseApp.Upms.ViewModels.Upms.VO
 {
     public class MenuTreeViewInfo : SysMenu, INotifyPropertyChanged
     {
@@ -14,11 +12,11 @@ namespace MaterialDemo.ViewModels.Pages.Upms.VObject
             get { return _isSelected; }
             set
             {
-                this._isSelected = value;
+                _isSelected = value;
                 OnPropertyChanged(nameof(IsSelected));
-                if (this.Children != null)
+                if (Children != null)
                 {
-                    foreach (var item in this.Children)
+                    foreach (var item in Children)
                     {
                         item.IsSelected = value;
                     }

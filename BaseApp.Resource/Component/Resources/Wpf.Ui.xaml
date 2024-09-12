@@ -6,47 +6,47 @@
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Resources/Variables.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Resources/Fonts.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Resources/Typography.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Resources/StaticColors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Resources/Accent.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Resources/Palette.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Resources/DefaultContextMenu.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Resources/DefaultFocusVisualStyle.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Resources/DefaultTextBoxScrollViewerStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Resources/Variables.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Resources/Fonts.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Resources/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Resources/StaticColors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Resources/Accent.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Resources/Palette.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Resources/DefaultContextMenu.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Resources/DefaultFocusVisualStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Resources/DefaultTextBoxScrollViewerStyle.xaml" />
 
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/AutoSuggestBox/AutoSuggestBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/Button/Button.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/DynamicScrollBar/DynamicScrollBar.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/DynamicScrollViewer/DynamicScrollViewer.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/InfoBadge/InfoBadge.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/ListView/ListView.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/ListView/ListViewItem.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/Menu/Menu.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/Menu/MenuItem.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/Menu/MenuLoader.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/NavigationView/NavigationView.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/NavigationView/NavigationViewBreadcrumbItem.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/NavigationView/NavigationViewContentPresenter.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/NavigationView/NavigationViewItemHeader.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/NavigationView/NavigationViewItemSeparator.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/NumberBox/NumberBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/Snackbar/Snackbar.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/TextBlock/TextBlock.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/TextBox/TextBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/TitleBar/TitleBar.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/CardControl/CardControl.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/CardExpander/CardExpander.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/CardAction/CardAction.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/VirtualizingWrapPanel/VirtualizingWrapPanel.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/TreeView/TreeView.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/ToggleSwitch/ToggleSwitch.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/TreeView/TreeViewItem.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/BreadcrumbBar/BreadcrumbBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/AutoSuggestBox/AutoSuggestBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/Button/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/DynamicScrollBar/DynamicScrollBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/DynamicScrollViewer/DynamicScrollViewer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/InfoBadge/InfoBadge.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/ListView/ListView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/ListView/ListViewItem.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/Menu/Menu.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/Menu/MenuItem.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/Menu/MenuLoader.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/NavigationView/NavigationView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/NavigationView/NavigationViewBreadcrumbItem.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/NavigationView/NavigationViewContentPresenter.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/NavigationView/NavigationViewItemHeader.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/NavigationView/NavigationViewItemSeparator.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/NumberBox/NumberBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/Snackbar/Snackbar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/TextBlock/TextBlock.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/TextBox/TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/TitleBar/TitleBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/CardControl/CardControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/CardExpander/CardExpander.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/CardAction/CardAction.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/VirtualizingWrapPanel/VirtualizingWrapPanel.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/TreeView/TreeView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/ToggleSwitch/ToggleSwitch.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/TreeView/TreeViewItem.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/BreadcrumbBar/BreadcrumbBar.xaml" />
 
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/WPFUI/MessageBox/MessageBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDemo;component/Component/Controls/Common/NavigationPresenter/GalleryNavigationPresenter.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/MessageBox/MessageBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/Common/NavigationPresenter/GalleryNavigationPresenter.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

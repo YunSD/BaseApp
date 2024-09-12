@@ -5,11 +5,10 @@ using MaterialDemo.Config.Security.Messages;
 using MaterialDemo.Config.UnitOfWork;
 using MaterialDemo.Domain.Models.Entity;
 using MaterialDemo.Security;
-using MaterialDemo.ViewModels.Pages.Base;
 using System.ComponentModel.DataAnnotations;
 using Wpf.Ui;
 
-namespace MaterialDemo.ViewModels.Pages.Upms
+namespace BaseApp.Upms.ViewModels.Upms
 {
     public partial class PersonViewModel : ObservableValidator
     {
@@ -27,7 +26,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
             repository = _unitOfWork.GetRepository<SysUser>();
             this.loginViewModel = loginViewModel;
             // init
-            this.initInfo();
+            initInfo();
         }
 
 
@@ -95,7 +94,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
         [RelayCommand]
         private void UpdatePassword()
         {
-            if (String.IsNullOrEmpty(Password) || String.IsNullOrEmpty(RepeatPassword))
+            if (string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(RepeatPassword))
             {
                 SnackbarService.ShowError("密码不能为空");
                 return;

@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 
-namespace MaterialDemo.Resource.Converters
+namespace BaseApp.Resource.Converters
 {
     public class EnumIndexConverter : IValueConverter
     {

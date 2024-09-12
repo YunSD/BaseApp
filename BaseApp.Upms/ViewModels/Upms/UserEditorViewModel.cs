@@ -5,7 +5,7 @@ using MaterialDemo.Domain.Models.Entity.Upms;
 using MaterialDemo.Utils;
 using System.ComponentModel.DataAnnotations;
 
-namespace MaterialDemo.ViewModels.Pages.Upms
+namespace BaseApp.Upms.ViewModels.Upms
 {
     public partial class UserEditorViewModel : ObservableValidator
     {
@@ -50,7 +50,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
 
         public UserEditorViewModel(SysUser sysUser, IList<SysRole> roles, FormSubmitEventHandler<SysUser> submitEvent)
         {
-            this.SubmitEvent = submitEvent;
+            SubmitEvent = submitEvent;
             this.roles = roles;
             entity = sysUser;
 

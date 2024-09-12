@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using BaseApp.Core.Utils;
 using System.Windows;
 using Wpf.Ui;
 
@@ -49,7 +50,7 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
 
     private void OnTemplateButtonClick(Type? pageType)
     {
-        INavigationService navigationService = App.GetRequiredService<INavigationService>();
+        INavigationService navigationService = ServiceProviderUtil.GetRequiredService<INavigationService>();
 
         if (pageType is not null)
         {

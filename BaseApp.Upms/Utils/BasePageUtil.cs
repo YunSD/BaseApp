@@ -53,7 +53,7 @@ namespace BaseApp.Core.Utils
 
         public static Type ParseClassType(string? clazz)
         {
-            Type type = typeof(Views.Pages.Base.EmptyViewPage);
+            Type type = typeof(EmptyViewPage);
             if (clazz == null) return type;
             try
             {

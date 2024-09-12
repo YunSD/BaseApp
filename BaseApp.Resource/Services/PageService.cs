@@ -1,3 +1,4 @@
+using System.Windows;
 using Wpf.Ui;
 
 namespace UiDesktopApp1.Services

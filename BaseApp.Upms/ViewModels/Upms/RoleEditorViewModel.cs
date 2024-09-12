@@ -3,7 +3,7 @@ using MaterialDemo.Domain.Models.Entity.Upms;
 using MaterialDemo.Utils;
 using System.ComponentModel.DataAnnotations;
 
-namespace MaterialDemo.ViewModels.Pages.Upms
+namespace BaseApp.Upms.ViewModels.Upms
 {
     public partial class RoleEditorViewModel : ObservableValidator
     {
@@ -30,7 +30,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
 
         public RoleEditorViewModel(SysRole entity, FormSubmitEventHandler<SysRole> submitEvent)
         {
-            this.SubmitEvent = submitEvent;
+            SubmitEvent = submitEvent;
             this.entity = entity;
 
             if (entity.RoleId.HasValue)
@@ -50,9 +50,9 @@ namespace MaterialDemo.ViewModels.Pages.Upms
 
             if (HasErrors) return;
 
-            this.entity.Name = Name;
-            this.entity.Code = Code;
-            this.entity.Remark = Remark;
+            entity.Name = Name;
+            entity.Code = Code;
+            entity.Remark = Remark;
 
             SubmitEvent(entity);
         }

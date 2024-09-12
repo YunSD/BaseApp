@@ -1,12 +1,12 @@
-﻿using MaterialDemo.Config.UnitOfWork;
+﻿using BaseApp.Upms.ViewModels.Upms.VO;
+using MaterialDemo.Config.UnitOfWork;
 using MaterialDemo.Domain.Models.Entity;
 using MaterialDemo.Domain.Models.Entity.Upms;
 using MaterialDemo.Utils;
-using MaterialDemo.ViewModels.Pages.Upms.VObject;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace MaterialDemo.ViewModels.Pages.Upms
+namespace BaseApp.Upms.ViewModels.Upms
 {
     public partial class RoleMenuSelectViewModel : ObservableValidator
     {
@@ -26,7 +26,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
 
         public RoleMenuSelectViewModel(SysRole entity, IUnitOfWork _unitOfWork)
         {
-            this.rowId = entity.RoleId;
+            rowId = entity.RoleId;
             this._unitOfWork = _unitOfWork;
 
             Expression<Func<SysRoleMenu, bool>> expression = exp => exp.RoleId != null && exp.RoleId == rowId;

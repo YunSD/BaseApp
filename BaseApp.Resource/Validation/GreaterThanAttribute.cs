@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MaterialDemo.Resource.Validation
+namespace BaseApp.Resource.Validation
 {
     public sealed class GreaterThanAttribute : ValidationAttribute
     {

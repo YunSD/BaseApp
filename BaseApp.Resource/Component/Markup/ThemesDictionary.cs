@@ -31,7 +31,7 @@ namespace Wpf.Ui.Markup;
 public class ThemesDictionary : ResourceDictionary
 {
 
-    internal const string ThemesDictionaryPath = "pack://application:,,,/MaterialDemo;component/Component/Resources/Theme/";
+    internal const string ThemesDictionaryPath = "pack://application:,,,/BaseApp.Resource;Component/Resources/Theme/";
     /// <summary>
     /// Sets the default application theme.
     /// </summary>

@@ -1,6 +1,4 @@
-﻿using MaterialDemo.Domain.Models.Entity;
-
-namespace MaterialDemo.ViewModels.Pages.Upms.VObject
+﻿namespace BaseApp.Upms.ViewModels.Upms.VO
 {
     public class SysMenuViewInfo : SysMenu
     {

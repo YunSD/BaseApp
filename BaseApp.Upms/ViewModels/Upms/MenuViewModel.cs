@@ -1,15 +1,15 @@
-﻿using log4net;
+﻿using BaseApp.Upms.ViewModels.Upms.VO;
+using log4net;
 using MaterialDemo.Config.Extensions;
 using MaterialDemo.Config.UnitOfWork;
 using MaterialDemo.Controls;
 using MaterialDemo.Domain.Models;
 using MaterialDemo.Domain.Models.Entity;
 using MaterialDemo.Utils;
-using MaterialDemo.ViewModels.Pages.Upms.VObject;
 using MaterialDemo.Views.Pages.Upms;
 using Wpf.Ui.Controls;
 
-namespace MaterialDemo.ViewModels.Pages.Upms
+namespace BaseApp.Upms.ViewModels.Upms
 {
     public partial class MenuViewModel : PageViewModelBase<SysMenuViewInfo>, INavigationAware
     {
@@ -37,7 +37,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
         }
 
         [RelayCommand]
-        private void OnRefresh() => this.OnSearch();
+        private void OnRefresh() => OnSearch();
 
 
         #endregion
@@ -75,7 +75,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
             }
             _unitOfWork.SaveChanges();
             repository.ChangeEntityState(entity, Microsoft.EntityFrameworkCore.EntityState.Detached);
-            this.OnSearch();
+            OnSearch();
             DialogHost.Close(BaseConstant.BaseDialog);
         }
 
@@ -89,7 +89,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
         {
             if (!entity.MenuId.HasValue) return;
             var confirm = new ConfirmDialog("确认删除？");
-            this.rowId = entity.MenuId;
+            rowId = entity.MenuId;
             var result = await DialogHost.Show(confirm, BaseConstant.BaseDialog, DeleteRowData);
         }
 
@@ -105,7 +105,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
             _unitOfWork.SaveChanges();
 
             // 刷新
-            this.OnSearch();
+            OnSearch();
         }
 
         #endregion
@@ -119,7 +119,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
         {
             Task.Run(() =>
             {
-                this.OnSearch();
+                OnSearch();
             });
         }
     }

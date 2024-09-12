@@ -11,7 +11,7 @@ using MaterialDemo.Views.Pages.Upms;
 using System.Linq.Expressions;
 using Wpf.Ui.Controls;
 
-namespace MaterialDemo.ViewModels.Pages.Upms
+namespace BaseApp.Upms.ViewModels.Upms
 {
     public partial class RoleViewModel : PageViewModelBase<SysRole>, INavigationAware
     {
@@ -56,14 +56,14 @@ namespace MaterialDemo.ViewModels.Pages.Upms
         {
             SearchName = null;
             SearchCode = null;
-            this.OnSearch();
+            OnSearch();
         }
 
         [RelayCommand]
         private void PageUpdated(FunctionEventArgs<int> info)
         {
             this.PageIndex = info.Info - 1;
-            this.OnSearch();
+            OnSearch();
         }
 
         #endregion
@@ -100,7 +100,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
             }
             _unitOfWork.SaveChanges();
             repository.ChangeEntityState(entity, Microsoft.EntityFrameworkCore.EntityState.Detached);
-            this.OnSearch();
+            OnSearch();
             DialogHost.Close(BaseConstant.BaseDialog);
         }
 
@@ -114,7 +114,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
         {
             if (!entity.RoleId.HasValue) return;
             var confirm = new ConfirmDialog("确认删除？");
-            this.rowId = entity.RoleId;
+            rowId = entity.RoleId;
             var result = await DialogHost.Show(confirm, BaseConstant.BaseDialog, DeleteRowData);
         }
 
@@ -140,7 +140,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
             _unitOfWork.SaveChanges();
 
             // 刷新
-            this.OnSearch();
+            OnSearch();
         }
 
         [RelayCommand]
@@ -163,7 +163,7 @@ namespace MaterialDemo.ViewModels.Pages.Upms
         {
             Task.Run(() =>
             {
-                this.OnSearch();
+                OnSearch();
             });
         }
     }

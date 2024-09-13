@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using Microsoft.Win32;
-using System.Windows.Media;
 
 namespace Wpf.Ui.Appearance;
 

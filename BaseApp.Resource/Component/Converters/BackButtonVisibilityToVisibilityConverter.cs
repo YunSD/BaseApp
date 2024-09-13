@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Globalization;
-using System.Windows.Data;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Converters;

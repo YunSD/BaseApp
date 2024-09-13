@@ -1,7 +1,6 @@
-using System.Windows;
 using Wpf.Ui;
 
-namespace UiDesktopApp1.Services
+namespace BaseApp.Resource.Services
 {
     /// <summary>
     /// Service that provides pages for navigation.

@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Assets\**" />
+    <EmbeddedResource Remove="Assets\**" />
+    <None Remove="Assets\**" />
+    <Page Remove="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Component\Resources\Fonts\FluentSystemIcons-Filled.ttf" />
+    <None Remove="Component\Resources\Fonts\FluentSystemIcons-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HandyControl" Version="3.5.1" />
     <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
@@ -15,6 +27,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BaseApp.Core\BaseApp.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Component\Resources\Fonts\FluentSystemIcons-Filled.ttf" />
+    <Resource Include="Component\Resources\Fonts\FluentSystemIcons-Regular.ttf" />
   </ItemGroup>
 
 </Project>

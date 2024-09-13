@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BaseApp.Core.Domain
 {
     [Table("sys_menu")]
-    public class SysMenu :BaseEntity
+    public class SysMenu : BaseEntity
     {
 
         [Key]

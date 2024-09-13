@@ -5,9 +5,6 @@
 //
 // Based on Windows UI Library
 
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 

@@ -3,9 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Globalization;
-using System.Windows.Data;
-
 namespace Wpf.Ui.Converters;
 
 internal class BoolToVisibilityConverter : IValueConverter

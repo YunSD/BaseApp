@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace BaseApp.Core.Utils
+﻿namespace BaseApp.Core.Utils
 {
     public class BaseFileUtil
     {

@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
-
-namespace BaseApp.Resource.Converters
+﻿namespace BaseApp.Resource.Converters
 {
     public class TableVisibilityConverter : IValueConverter
     {

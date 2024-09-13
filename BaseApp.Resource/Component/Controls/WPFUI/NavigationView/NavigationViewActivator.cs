@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Reflection;
 using System.Windows.Controls;
 using Wpf.Ui.Designer;
 

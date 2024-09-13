@@ -5,9 +5,6 @@
 //
 // TODO: It's too hardcoded, we should define better formula.
 
-using System.Globalization;
-using System.Windows.Data;
-
 namespace Wpf.Ui.Converters;
 
 internal class ProgressThicknessConverter : IValueConverter

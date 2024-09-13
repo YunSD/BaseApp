@@ -3,8 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using MaterialDemo.Views.Windows;
+using BaseApp.App.Views;
 using Microsoft.Extensions.Hosting;
+using System.Windows;
 
 
 namespace MaterialDemo.Services

@@ -5,7 +5,7 @@
 
 namespace BaseApp.Core.Extensions;
 
-internal static class ServiceCollectionExtensions
+public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddTransientFromNamespace(
         this IServiceCollection services,

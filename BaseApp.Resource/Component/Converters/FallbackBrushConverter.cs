@@ -3,10 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Media;
-
 namespace Wpf.Ui.Converters;
 
 internal class FallbackBrushConverter : IValueConverter

@@ -1,0 +1,34 @@
+﻿<Window x:Class="BaseApp.App.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=BaseApp.Resource"
+        Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
+        Width="1400"
+        Height="800"
+        Background="{DynamicResource WindowBackground}"
+        SnapsToDevicePixels="True"
+        TextElement.FontSize="13"
+        TextElement.FontWeight="Regular"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType"
+        UseLayoutRounding="True"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d">
+    <Window.Icon>
+        <BitmapImage UriSource="pack://application:,,,/Assets/icon.png" />
+    </Window.Icon>
+
+    <Grid KeyboardNavigation.TabNavigation="None">
+        <materialDesign:DialogHost Name="HostDialog" Focusable="False" Identifier="RootDialog" IsTabStop="False" KeyboardNavigation.TabNavigation="None" Style="{StaticResource MaterialDesignEmbeddedDialogHost}">
+            <materialDesign:DialogHost DialogTheme="Inherit" Focusable="False" Identifier="BaseDialog" IsTabStop="False" KeyboardNavigation.TabNavigation="None" Style="{StaticResource MaterialDesignEmbeddedDialogHost}">
+                <Frame x:Name="MainFrame" BorderThickness="0" NavigationUIVisibility="Hidden" />
+            </materialDesign:DialogHost>
+        </materialDesign:DialogHost>
+        <ui:SnackbarPresenter x:Name="SnackbarPresenter" />
+    </Grid>
+
+</Window>

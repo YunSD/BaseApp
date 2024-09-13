@@ -11,12 +11,9 @@
 // Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
 // https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Media;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;

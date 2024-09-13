@@ -10,9 +10,6 @@
 // TODO: Disable expression by default
 // TODO: Lock to digit characters only by property
 
-using System.Windows.Data;
-using System.Windows.Input;
-
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 

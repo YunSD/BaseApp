@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Markup;
-
 namespace Wpf.Ui.Markup;
 
 /// <summary>
@@ -29,7 +27,7 @@ namespace Wpf.Ui.Markup;
 [UsableDuringInitialization(true)]
 public class ControlsDictionary : ResourceDictionary
 {
-    private const string DictionaryUri = "pack://application:,,,/BaseApp.Resource;Component/Resources/Wpf.Ui.xaml";
+    private const string DictionaryUri = "pack://application:,,,/BaseApp.Resource;component/Component/Resources/Wpf.Ui.xaml";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ControlsDictionary"/> class.

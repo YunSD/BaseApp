@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Diagnostics;
 using System.Windows.Controls;
 using IRelayCommand = Wpf.Ui.Input.IRelayCommand;
 

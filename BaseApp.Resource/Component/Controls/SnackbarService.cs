@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Media;
 using Wpf.Ui.Controls;
 using Snackbar = Wpf.Ui.Controls.Snackbar;
 

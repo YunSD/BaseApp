@@ -9,7 +9,6 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using Wpf.Ui.Input;
 
 // ReSharper disable once CheckNamespace

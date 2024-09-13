@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using BaseApp.Core.Utils;
-using System.Windows;
 using Wpf.Ui;
 
 namespace BaseApp.Resource.Controls;

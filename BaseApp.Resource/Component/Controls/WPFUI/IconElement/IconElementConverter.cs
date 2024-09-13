@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.ComponentModel;
-using System.Globalization;
 using Wpf.Ui.Extensions;
 
 // ReSharper disable once CheckNamespace

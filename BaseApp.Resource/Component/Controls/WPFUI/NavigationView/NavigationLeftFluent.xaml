@@ -2,7 +2,7 @@
 
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;Component/Controls/WPFUI/NavigationView/NavigationViewConstants.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/NavigationView/NavigationViewConstants.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="LeftFluentNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">

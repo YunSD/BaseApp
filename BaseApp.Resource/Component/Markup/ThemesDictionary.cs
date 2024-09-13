@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Markup;
 using Wpf.Ui.Appearance;
 
 namespace Wpf.Ui.Markup;
@@ -31,7 +30,7 @@ namespace Wpf.Ui.Markup;
 public class ThemesDictionary : ResourceDictionary
 {
 
-    internal const string ThemesDictionaryPath = "pack://application:,,,/BaseApp.Resource;Component/Resources/Theme/";
+    internal const string ThemesDictionaryPath = "pack://application:,,,/BaseApp.Resource;component/Component/Resources/Theme/";
     /// <summary>
     /// Sets the default application theme.
     /// </summary>

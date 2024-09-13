@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.ComponentModel;
-using System.Windows.Markup;
 
 namespace Wpf.Ui.Markup;
 

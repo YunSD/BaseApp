@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BaseApp.Core.Db;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using BaseApp.Core.Db;
 
 namespace BaseApp.Core.Domain
 {

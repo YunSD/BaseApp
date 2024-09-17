@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,10 +18,16 @@
 
   <ItemGroup>
     <Folder Include="Views\Business\" />
+    <Folder Include="Views\Windows\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FaceRecognitionDotNet" Version="1.3.0.7" />
+    <PackageReference Include="FaceRecognitionDotNet.MKL" Version="1.3.0.7" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0" />
+    <PackageReference Include="OpenCvSharp4" Version="4.10.0.20240616" />
+    <PackageReference Include="OpenCvSharp4.Windows" Version="4.10.0.20240616" />
+    <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.10.0.20240616" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,12 +39,36 @@
     <Resource Include="Assets\cover.png" />
     <Resource Include="Assets\icon.ico" />
     <Resource Include="Assets\icon.png" />
+    <Resource Include="Resources\Models\dlib_face_recognition_resnet_model_v1.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\Models\haarcascade_frontalface_default.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Models\mmod_human_face_detector.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Models\shape_predictor_5_face_landmarks.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Models\shape_predictor_68_face_landmarks.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Resources\LoginViewRes.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Update="Resources\Theme.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
 
 </Project>

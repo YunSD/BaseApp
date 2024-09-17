@@ -58,8 +58,8 @@
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="border"
                             Background="{TemplateBinding Background}"
-                            BorderBrush="LightGray"
-                            BorderThickness="1"
+                            BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush }"
+                            BorderThickness="2"
                             CornerRadius="15">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>

@@ -1,4 +1,5 @@
-﻿using BaseApp.Core.Domain;
+﻿using BaseApp.App.Views;
+using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.Utils;

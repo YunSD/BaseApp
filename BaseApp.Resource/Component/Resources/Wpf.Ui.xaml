@@ -20,6 +20,7 @@
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/Button/Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/DynamicScrollBar/DynamicScrollBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/DynamicScrollViewer/DynamicScrollViewer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/Image/Image.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/InfoBadge/InfoBadge.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/ListView/ListView.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/ListView/ListViewItem.xaml" />

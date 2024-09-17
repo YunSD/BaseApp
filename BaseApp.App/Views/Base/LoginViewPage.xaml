@@ -3,8 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:enum="clr-namespace:BaseApp.Core.Enums;assembly=BaseApp.Core"
+      xmlns:converters="clr-namespace:BaseApp.Resource.Converters;assembly=BaseApp.Resource"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=BaseApp.Resource" xmlns:viewmodels="clr-namespace:BaseApp.App.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
       Title="LOGIN"
       d:DesignHeight="1080"
       d:DesignWidth="1920"
@@ -31,6 +34,7 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="Foreground" Value="{DynamicResource InputForeground}" />
             </Style>
+            <converters:BaseVisibilityConverter x:Key="BaseVisibilityConverter" />
         </ResourceDictionary>
     </Page.Resources>
 
@@ -48,7 +52,8 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Margin="45,30,0,0" VerticalAlignment="Center" IsHitTestVisible="False" Orientation="Horizontal">
@@ -56,52 +61,124 @@
                     <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" FontSize="20" FontWeight="SemiBold" Text="{Binding MainWindowViewModel.ApplicationTitle, Mode=OneWay}" />
                 </StackPanel>
 
-                <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                    <TextBlock Foreground="{DynamicResource ThemeBrush}" Style="{StaticResource TitleText}" Text="登录到系统" />
-                    <StackPanel Margin="0,30,0,50" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Grid Grid.Row="2" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Foreground="{DynamicResource ThemeBrush}" Style="{StaticResource TitleText}" Text="登录到系统" />
 
-                        <Button Style="{StaticResource ButtonCircle}">
+                    <StackPanel Grid.Row="1" Margin="0,30,0,50" HorizontalAlignment="Center" Orientation="Horizontal">
+
+                        <Button Command="{Binding LoginViewModel.SwitchLoginTypeCommand}" CommandParameter="PASSWORD">
                             <materialDesign:PackIcon Width="25" Height="25" Kind="KeyOutline" />
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource ButtonCircle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LoginViewModel.LoginType}" Value="{x:Static enum:LoginType.PASSWORD}">
+                                            <Setter Property="Foreground" Value="{DynamicResource ThemeBrush}" />
+                                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                         </Button>
 
-                        <Button Style="{StaticResource ButtonCircle}">
+                        <Button Command="{Binding LoginViewModel.SwitchLoginTypeCommand}" CommandParameter="CARD">
                             <materialDesign:PackIcon Width="25" Height="25" Kind="CardAccountDetailsOutline" />
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource ButtonCircle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LoginViewModel.LoginType}" Value="{x:Static enum:LoginType.CARD}">
+                                            <Setter Property="Foreground" Value="{DynamicResource ThemeBrush}" />
+                                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                         </Button>
 
-                        <Button Style="{StaticResource ButtonCircle}">
+                        <Button Command="{Binding LoginViewModel.SwitchLoginTypeCommand}" CommandParameter="FACE_RECONGNITION">
                             <materialDesign:PackIcon Width="25" Height="25" Kind="FaceRecognition" />
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource ButtonCircle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LoginViewModel.LoginType}" Value="{x:Static enum:LoginType.FACE_RECONGNITION}">
+                                            <Setter Property="Foreground" Value="{DynamicResource ThemeBrush}" />
+                                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                         </Button>
 
-                        <Button Style="{StaticResource ButtonCircle}">
+                        <Button Command="{Binding LoginViewModel.SwitchLoginTypeCommand}" CommandParameter="FINGERPRINT">
                             <materialDesign:PackIcon Width="25" Height="25" Kind="Fingerprint" />
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource ButtonCircle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LoginViewModel.LoginType}" Value="{x:Static enum:LoginType.FINGERPRINT}">
+                                            <Setter Property="Foreground" Value="{DynamicResource ThemeBrush}" />
+                                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                         </Button>
                     </StackPanel>
+                    
+                    <StackPanel Grid.Row="2">
 
-                    <!--<TextBlock Text="" Style="{StaticResource NormalText}" Foreground="DimGray" Margin="0 30 0 10"></TextBlock>-->
+                        <StackPanel x:Name="PASSWORD" Visibility="{Binding LoginViewModel.LoginType, Converter={StaticResource BaseVisibilityConverter}, ConverterParameter=PASSWORD}">
+                            <Border Margin="80,7" BorderBrush="{StaticResource InputBorderBrush}" BorderThickness="1" CornerRadius="5">
+                                <Grid Margin="1,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <materialDesign:PackIcon Margin="5,0" HorizontalAlignment="Left" VerticalAlignment="Center" Kind="Account" />
+                                    <TextBox x:Name="username" hc:InfoElement.Placeholder="请输入用户名." InputMethod.IsInputMethodEnabled="False" Style="{StaticResource LoginBoxControl}" Text="{Binding LoginViewModel.Username}" />
+                                </Grid>
+                            </Border>
+
+                            <Border Margin="80,7" BorderBrush="{StaticResource InputBorderBrush}" BorderThickness="1" CornerRadius="5">
+                                <Grid Margin="1,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <materialDesign:PackIcon Margin="5,0" HorizontalAlignment="Left" VerticalAlignment="Center" Kind="LockPlusOutline" />
+                                    <PasswordBox x:Name="PasswordBox" hc:InfoElement.Placeholder="请输入密码." InputMethod.IsInputMethodEnabled="False" Style="{StaticResource PasswordBoxControl}" />
+                                </Grid>
+                            </Border>
+
+                            <Button x:Name="SignIn" Click="SignIn_Click" Content="Sign In" Style="{StaticResource submitButton}" />
+                        </StackPanel>
+
+                        <StackPanel x:Name="CARD" Visibility="{Binding LoginViewModel.LoginType, Converter={StaticResource BaseVisibilityConverter}, ConverterParameter=CARD}">
+                            <Border Margin="80,10,80,0" BorderBrush="{StaticResource InputBorderBrush}" BorderThickness="3" CornerRadius="15">
+                                <materialDesign:PackIcon HorizontalAlignment="Center" Margin="30" Kind="AccessPoint" Width="150" Height="150" Foreground="{StaticResource InputBorderBrush}" />
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel x:Name="FACE_RECONGNITION" Visibility="{Binding LoginViewModel.LoginType, Converter={StaticResource BaseVisibilityConverter}, ConverterParameter=FACE_RECONGNITION}">
+                            <Border HorizontalAlignment="Center" ClipToBounds="True" BorderBrush="{StaticResource InputBorderBrush}" BorderThickness="3" CornerRadius="15">
+                                <ui:Image x:Name="FaceImage" CornerRadius="15" Width="190" Height="190" Stretch="Fill"/>
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel x:Name="FINGERPRINT" Visibility="{Binding LoginViewModel.LoginType, Converter={StaticResource BaseVisibilityConverter}, ConverterParameter=FINGERPRINT}">
+                            <Border HorizontalAlignment="Center" BorderBrush="{StaticResource InputBorderBrush}" BorderThickness="3" CornerRadius="15">
+                                <materialDesign:PackIcon HorizontalAlignment="Center" Margin="20" Kind="Fingerprint" Width="150" Height="150" Foreground="{StaticResource InputBorderBrush}" />
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
 
 
-                    <Border Margin="80,7" BorderBrush="{StaticResource InputBorderBrush}" BorderThickness="1" CornerRadius="5">
-                        <Grid Margin="1,1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <materialDesign:PackIcon Margin="5,0" HorizontalAlignment="Left" VerticalAlignment="Center" Kind="Account" />
-                            <TextBox x:Name="username" hc:InfoElement.Placeholder="请输入用户名." InputMethod.IsInputMethodEnabled="False" Style="{StaticResource LoginBoxControl}" Text="{Binding LoginViewModel.Username}" />
-                        </Grid>
-                    </Border>
 
-                    <Border Margin="80,7" BorderBrush="{StaticResource InputBorderBrush}" BorderThickness="1" CornerRadius="5">
-                        <Grid Margin="1,1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <materialDesign:PackIcon Margin="5,0" HorizontalAlignment="Left" VerticalAlignment="Center" Kind="LockPlusOutline" />
-                            <PasswordBox x:Name="PasswordBox" hc:InfoElement.Placeholder="请输入密码." InputMethod.IsInputMethodEnabled="False" Style="{StaticResource PasswordBoxControl}" />
-                        </Grid>
-                    </Border>
-
-                    <Button x:Name="SignIn" Click="SignIn_Click" Content="Sign In" Style="{StaticResource submitButton}" />
-                </StackPanel>
+                <!--<TextBlock Text="" Style="{StaticResource NormalText}" Foreground="DimGray" Margin="0 30 0 10"></TextBlock>-->
+                    
+                    
             </Grid>
 
         </Border>

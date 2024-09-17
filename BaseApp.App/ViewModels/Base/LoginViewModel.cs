@@ -1,9 +1,11 @@
 ﻿using BaseApp.Core.Domain;
+using BaseApp.Core.Enums;
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Core.Utils;
 using BaseApp.Upms.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
 namespace BaseApp.App.ViewModels
@@ -23,6 +25,8 @@ namespace BaseApp.App.ViewModels
         [ObservableProperty]
         public string? username;
 
+        [ObservableProperty]
+        public LoginType loginType = LoginType.PASSWORD;
 
         public LoginViewModel(IUnitOfWork unitOfWork, BaseUserDetailsService userDetailsService)
         {
@@ -50,5 +54,17 @@ namespace BaseApp.App.ViewModels
         {
             return _unitOfWork.GetRepository<SysUser>().GetFirstOrDefault(predicate: u => u.Username != null && u.Username.Equals(username));
         }
+
+        [RelayCommand]
+        private void SwitchLoginType(string key) {
+            LoginType type = (LoginType)Enum.Parse(typeof(LoginType), key);
+            if (this.LoginType != type) {
+                this.LoginType = type;
+                WeakReferenceMessenger.Default.Send(new SwitchLoginMessage(type));
+            } 
+        }
+
+
+
     }
 }

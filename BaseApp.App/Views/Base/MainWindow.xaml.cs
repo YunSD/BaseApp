@@ -1,7 +1,6 @@
 ﻿using BaseApp.App.Windows;
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.Utils;
-using BaseApp.Upms.Views;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Windows;
 using System.Windows.Controls;

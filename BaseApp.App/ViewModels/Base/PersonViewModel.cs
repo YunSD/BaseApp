@@ -1,13 +1,16 @@
-﻿using BaseApp.Core.Domain;
+﻿using BaseApp.App.Views;
+using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Core.Utils;
 using BaseApp.Upms.Services;
+using BaseApp.Upms.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using log4net;
+using MaterialDesignThemes.Wpf;
 using System.ComponentModel.DataAnnotations;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
@@ -122,6 +125,14 @@ namespace BaseApp.App.ViewModels
             _unitOfWork.SaveChanges();
             SnackbarService.ShowSuccess("用户密码更新成功。");
             repository.ChangeEntityState(user, Microsoft.EntityFrameworkCore.EntityState.Detached);
+        }
+
+
+        [RelayCommand]
+        private void OpenFaceRegistionPage()
+        {
+            PersonFaceRegistration page = new PersonFaceRegistration();
+            DialogHost.Show(page, BaseConstant.BaseDialog);
         }
 
 

@@ -37,7 +37,7 @@ namespace BaseApp.App.Views
             this.MainWindowViewModel = MainWindowViewModel;
             this.LoginViewModel = loginViewModel;
             this.DataContext = this;
-            
+
             InitializeComponent();
 
             WeakReferenceMessenger.Default.Register<SwitchLoginMessage>(this);
@@ -115,24 +115,27 @@ namespace BaseApp.App.Views
         }
 
 
-        
+
 
         private int frameCounter = 0;
-       
         private void CompositionTarget_Rendering(object? sender, EventArgs e)
         {
             if (frameCounter++ % 5 != 0) return;
-            if (CameraService.IsOpened())
+
+            Task.Run(() =>
             {
                 OpenCvSharp.Mat frame = CameraService.Read();
-                FaceUtil.FaceDetect(frame);
-                Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 4, frame.Height / 4));
                 if (!frame.Empty())
                 {
-                    var bitmapSource = frame.ToBitmapSource();
-                    FaceImage.Source = bitmapSource;
+                    FaceUtil.FaceDetect(frame);
+                    Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 2, frame.Height / 2));
+                    Dispatcher.Invoke(() =>
+                    {
+                        var bitmapSource = frame.ToBitmapSource();
+                        FaceImage.Source = bitmapSource;
+                    });
                 }
-            }
+            });
         }
 
         private void UnloadCameraReader()

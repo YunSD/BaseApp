@@ -1,5 +1,4 @@
 ﻿using BaseApp.App.Services;
-using BaseApp.App.ViewModels;
 using BaseApp.App.Views;
 using BaseApp.App.Windows;
 using BaseApp.Core.Db;

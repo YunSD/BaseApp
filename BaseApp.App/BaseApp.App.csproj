@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="C:\Users\Yun\.nuget\packages\faceaisharp.models.arcface.lresnet100e-ir-int8\0.20230419.1\contentFiles\any\any\onnx\arcfaceresnet100-11-int8.onnx" />
+    <Content Remove="C:\Users\Yun\.nuget\packages\faceaisharp.models.openvino.open-closed-eye-0001\0.20220116.2\contentFiles\any\any\onnx\open_closed_eye.onnx" />
+    <Content Remove="C:\Users\Yun\.nuget\packages\faceaisharp.models.scrfd.2dot5g_kps\0.20230205.2\contentFiles\any\any\onnx\scrfd_2.5g_kps.onnx" />
     <Content Remove="C:\Users\zzz\.nuget\packages\faceaisharp.models.arcface.lresnet100e-ir-int8\0.20230419.1\contentFiles\any\any\onnx\arcfaceresnet100-11-int8.onnx" />
     <Content Remove="C:\Users\zzz\.nuget\packages\faceaisharp.models.openvino.open-closed-eye-0001\0.20220116.2\contentFiles\any\any\onnx\open_closed_eye.onnx" />
     <Content Remove="C:\Users\zzz\.nuget\packages\faceaisharp.models.scrfd.2dot5g_kps\0.20230205.2\contentFiles\any\any\onnx\scrfd_2.5g_kps.onnx" />

@@ -5,25 +5,22 @@
 
         private static readonly OpenCvSharp.VideoCapture videoCapture = new OpenCvSharp.VideoCapture(0, OpenCvSharp.VideoCaptureAPIs.DSHOW);
 
-        public static bool IsOpened() {
+        public static bool IsOpened()
+        {
             return videoCapture.IsOpened();
         }
 
 
-        private static OpenCvSharp.Mat frame = new OpenCvSharp.Mat();
-
-        public static OpenCvSharp.Mat Read() {
+        public static OpenCvSharp.Mat Read()
+        {
+            OpenCvSharp.Mat frame = new OpenCvSharp.Mat();
             videoCapture.Read(frame);
             return frame;
         }
 
 
-
-
-
-
-        public static void Dispose() {
-            frame.Dispose();
+        public static void Dispose()
+        {
             videoCapture.Dispose();
         }
 

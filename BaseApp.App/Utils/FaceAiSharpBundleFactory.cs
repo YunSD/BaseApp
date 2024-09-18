@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Georg Jung. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.IO;
-using System.Reflection;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Microsoft.ML.OnnxRuntime;
+using System.IO;
 
 namespace FaceAiSharp;
 

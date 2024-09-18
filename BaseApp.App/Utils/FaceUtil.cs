@@ -1,17 +1,8 @@
 ﻿using FaceAiSharp;
-using MathNet.Numerics.RootFinding;
-using OpenCvSharp.Dnn;
-using OpenCvSharp.WpfExtensions;
+using OpenCvSharp;
+using OpenCvSharp.Face;
 using SixLabors.ImageSharp.PixelFormats;
 using System.IO;
-using System.Windows.Media.Imaging;
-
-using Microsoft.ML.OnnxRuntime.Tensors;  // DenseTensor
-
-using SixLabors.ImageSharp;  // Image, Size
-using SixLabors.ImageSharp.Processing;
-using OpenCvSharp.Face;
-using OpenCvSharp;
 
 namespace BaseApp.App.Utils
 {
@@ -28,19 +19,17 @@ namespace BaseApp.App.Utils
         private static readonly IFaceEmbeddingsGenerator faceEmbeddings = FaceAiSharpBundleFactory.CreateFaceEmbeddingsGenerator();
 
 
-
-
         /// <summary>
         /// 通过 FaceAI 获取人脸的数据矩阵
         /// </summary>
         /// <param name="frame"></param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static float[]? GenerateEmbedding(OpenCvSharp.Mat frame) {
+        public static float[]? GenerateEmbedding(OpenCvSharp.Mat frame)
+        {
             if (frame.Empty()) throw new NullReferenceException();
 
             SixLabors.ImageSharp.Image<Rgb24> image = SixLabors.ImageSharp.Image.Load<Rgb24>(frame.ToMemoryStream());
-            return null;
 
             IReadOnlyCollection<FaceDetectorResult> faces = faceDetector.DetectFaces(image);
 
@@ -50,52 +39,25 @@ namespace BaseApp.App.Utils
                 faceEmbeddings.AlignFaceUsingLandmarks(image, faces.First().Landmarks!);
                 result = faceEmbeddings.GenerateEmbedding(image);
             }
-
             image.Dispose();
-
             return result;
-
-
-            //SixLabors.ImageSharp.Image<Rgb24> image = SixLabors.ImageSharp.Image.Load<Rgb24>(frame.ToMemoryStream());
-
-            //IReadOnlyCollection<FaceDetectorResult> faces = faceDetector.DetectFaces(image);
-
-            //float[]? result = null;
-            //if (faces.Count == 1) {
-            //    faceEmbeddings.AlignFaceUsingLandmarks(image, faces.First().Landmarks!);
-            //    result = faceEmbeddings.GenerateEmbedding(image);
-            //}
-
-            //image.Dispose();
-
-            //return result;
         }
 
-
-
-        private static volatile OpenCvSharp.Mat grayFrame = new Mat();
-        public static bool DetectLiveness(Mat frame) {
-            // 转换为灰度图像
-            Cv2.CvtColor(frame, grayFrame, ColorConversionCodes.BGR2GRAY);
-            Cv2.EqualizeHist(grayFrame, grayFrame);
-            // 进行直方图均衡化（可选，但通常用于提高 LBP 性能）
-            Cv2.EqualizeHist(frame, frame);
-            // LBP 纹理检测
-            var predictionResult = lBPHFaceRecognizer.Predict(grayFrame);
-            if (predictionResult == -1) return true;
+        public static bool DotEmbedding(float[] first, float[] second)
+        {
+            float dot = FaceAiSharp.Extensions.GeometryExtensions.Dot(first, second);
+            if (dot >= 0.60) return true;
             return false;
         }
 
 
         public static void FaceDetect(OpenCvSharp.Mat mat)
         {
-            Rect[] rects = cascadeClassifier.DetectMultiScale(mat, 1.05, 7, OpenCvSharp.HaarDetectionTypes.ScaleImage, new OpenCvSharp.Size(50, 50));
-            if (rects.Length > 0)
+            Rect[] rects = cascadeClassifier.DetectMultiScale(mat, 1.05, 15, OpenCvSharp.HaarDetectionTypes.ScaleImage, new OpenCvSharp.Size(100, 100));
+            if (rects.Length == 1)
             {
                 Mat faceROI = new Mat(mat, rects[0]);
-                if (DetectLiveness(faceROI)) {
-                    DrawFocusRectangle(mat, rects[0], 50, OpenCvSharp.Scalar.Green, 8);
-                }
+                DrawFocusRectangle(mat, rects[0], 50, OpenCvSharp.Scalar.Green, 8);
             }
         }
 

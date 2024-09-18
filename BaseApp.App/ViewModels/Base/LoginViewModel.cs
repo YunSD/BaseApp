@@ -56,12 +56,14 @@ namespace BaseApp.App.ViewModels
         }
 
         [RelayCommand]
-        private void SwitchLoginType(string key) {
+        private void SwitchLoginType(string key)
+        {
             LoginType type = (LoginType)Enum.Parse(typeof(LoginType), key);
-            if (this.LoginType != type) {
+            if (this.LoginType != type)
+            {
                 this.LoginType = type;
                 WeakReferenceMessenger.Default.Send(new SwitchLoginMessage(type));
-            } 
+            }
         }
 
 

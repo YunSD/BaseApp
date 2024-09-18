@@ -1,4 +1,6 @@
-﻿using BaseApp.App.Views;
+﻿using BaseApp.App.Services;
+using BaseApp.App.ViewModels;
+using BaseApp.App.Views;
 using BaseApp.App.Windows;
 using BaseApp.Core.Db;
 using BaseApp.Core.Extensions;
@@ -127,6 +129,7 @@ namespace MaterialDemo
         /// </summary>
         private async void OnExit(object sender, ExitEventArgs e)
         {
+            CameraService.Dispose();
             await _host.StopAsync();
             _host.Dispose();
         }

@@ -7,7 +7,21 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Windows\**" />
+    <EmbeddedResource Remove="Views\Windows\**" />
+    <None Remove="Views\Windows\**" />
+    <Page Remove="Views\Windows\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\zzz\.nuget\packages\faceaisharp.models.arcface.lresnet100e-ir-int8\0.20230419.1\contentFiles\any\any\onnx\arcfaceresnet100-11-int8.onnx" />
+    <Content Remove="C:\Users\zzz\.nuget\packages\faceaisharp.models.openvino.open-closed-eye-0001\0.20220116.2\contentFiles\any\any\onnx\open_closed_eye.onnx" />
+    <Content Remove="C:\Users\zzz\.nuget\packages\faceaisharp.models.scrfd.2dot5g_kps\0.20230205.2\contentFiles\any\any\onnx\scrfd_2.5g_kps.onnx" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Assets\background.png" />
@@ -18,16 +32,17 @@
 
   <ItemGroup>
     <Folder Include="Views\Business\" />
-    <Folder Include="Views\Windows\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FaceRecognitionDotNet" Version="1.3.0.7" />
-    <PackageReference Include="FaceRecognitionDotNet.MKL" Version="1.3.0.7" />
+    <PackageReference Include="FaceAiSharp.Bundle" Version="0.5.23" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.19.2" />
     <PackageReference Include="OpenCvSharp4" Version="4.10.0.20240616" />
     <PackageReference Include="OpenCvSharp4.Windows" Version="4.10.0.20240616" />
     <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.10.0.20240616" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,34 +54,31 @@
     <Resource Include="Assets\cover.png" />
     <Resource Include="Assets\icon.ico" />
     <Resource Include="Assets\icon.png" />
-    <Resource Include="Resources\Models\dlib_face_recognition_resnet_model_v1.dat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Models\haarcascade_frontalface_default.xml">
+    <None Update="resources\models\haarcascade_frontalface_default.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Models\mmod_human_face_detector.dat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="resources\onnx\arcfaceresnet100-11-int8.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Models\shape_predictor_5_face_landmarks.dat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="resources\onnx\open_closed_eye.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Models\shape_predictor_68_face_landmarks.dat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="resources\onnx\scrfd_2.5g_kps.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Resources\LoginViewRes.xaml">
+    <Page Update="resources\LoginViewRes.xaml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Page>
-    <Page Update="Resources\Theme.xaml">
+    <Page Update="resources\Theme.xaml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Page>
   </ItemGroup>

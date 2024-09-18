@@ -1,24 +1,20 @@
-﻿using BaseApp.App.ViewModels;
+﻿using BaseApp.App.Services;
+using BaseApp.App.Utils;
+using BaseApp.App.ViewModels;
 using BaseApp.App.Windows;
 using BaseApp.Core.Enums;
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.Utils;
 using BaseApp.Resource.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using log4net;
 using MaterialDesignThemes.Wpf;
 using OpenCvSharp;
 using OpenCvSharp.WpfExtensions;
-using System.Diagnostics;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
 using Wpf.Ui;
 
 namespace BaseApp.App.Views
@@ -26,7 +22,7 @@ namespace BaseApp.App.Views
     /// <summary>
     /// LoginView.xaml 的交互逻辑
     /// </summary>
-    public partial class LoginViewPage : Page, IRecipient<SwitchLoginMessage>, IRecipient<LoginCompletedRedirectionMessage>
+    public partial class LoginViewPage : Page, IRecipient<SwitchLoginMessage>, IRecipient<LoginCompletedMessage>
     {
 
         #region ViewModel
@@ -36,19 +32,17 @@ namespace BaseApp.App.Views
 
         private ILog logger = LogManager.GetLogger(nameof(LoginViewPage));
 
-        private OpenCvSharp.VideoCapture videoCapture;
-
         public LoginViewPage(LoginViewModel loginViewModel, MainWindowViewModel MainWindowViewModel)
         {
             this.MainWindowViewModel = MainWindowViewModel;
             this.LoginViewModel = loginViewModel;
             this.DataContext = this;
-            InitializeComponent();
-            WeakReferenceMessenger.Default.Register<SwitchLoginMessage>(this);
-            WeakReferenceMessenger.Default.Register<LoginCompletedRedirectionMessage>(this);
-
             
-            InitializeCameraAsync();
+            InitializeComponent();
+
+            WeakReferenceMessenger.Default.Register<SwitchLoginMessage>(this);
+            WeakReferenceMessenger.Default.Register<LoginCompletedMessage>(this);
+
         }
 
         private async void SignIn_Click(object sender, RoutedEventArgs e)
@@ -105,72 +99,50 @@ namespace BaseApp.App.Views
 
         }
 
-        
+
 
         /// <summary>
         /// 摄像头
         /// </summary>
         private void LoadCameraReader()
         {
-            if (!videoCapture.IsOpened()) {
-                SnackbarService.ShowError("摄像头无法正常打开。");
+            if (!CameraService.IsOpened())
+            {
+                SnackbarService.ShowError("摄像头未正常打开。");
                 return;
             }
             CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
 
-        private void UnloadCameraReader() {
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;
-        }
+
+        
 
         private int frameCounter = 0;
-        private OpenCvSharp.Mat frame = new OpenCvSharp.Mat();
+       
         private void CompositionTarget_Rendering(object? sender, EventArgs e)
         {
             if (frameCounter++ % 5 != 0) return;
-            if (videoCapture.IsOpened()) {
-                videoCapture.Read(frame);
+            if (CameraService.IsOpened())
+            {
+                OpenCvSharp.Mat frame = CameraService.Read();
+                FaceUtil.FaceDetect(frame);
                 Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 4, frame.Height / 4));
-                if (!frame.Empty()) {
+                if (!frame.Empty())
+                {
                     var bitmapSource = frame.ToBitmapSource();
                     FaceImage.Source = bitmapSource;
                 }
             }
         }
 
-        private async void InitializeCameraAsync() {
-            await Task.Run(() =>
-            {
-                this.videoCapture = new OpenCvSharp.VideoCapture(0);
-                this.videoCapture.Open(0);  // 通过摄像头索引打开摄像头
-                
-            });
-            this.CompositionTarget_Rendering(this, null);
-        }
-
-        
-
-        public async void Receive(LoginCompletedRedirectionMessage message)
+        private void UnloadCameraReader()
         {
-            await Task.Run(StopCamera);
-        }
-
-        private void StopCamera()
-        {
-            // 停止触发 CompositionTarget.Rendering 事件，停止帧捕获
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
+        }
 
-            // 释放摄像头资源
-            if (videoCapture != null && videoCapture.IsOpened())
-            {
-                videoCapture.Release(); // 释放摄像头资源
-                videoCapture.Dispose();
-            }
-
-            if (frame != null)
-            {
-                frame.Dispose(); // 释放帧
-            }
+        public void Receive(LoginCompletedMessage message)
+        {
+            UnloadCameraReader();
         }
     }
 }

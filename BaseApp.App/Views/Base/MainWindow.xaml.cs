@@ -1,6 +1,7 @@
 ﻿using BaseApp.App.Windows;
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.Utils;
+using BaseApp.Upms.Views;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Windows;
 using System.Windows.Controls;
@@ -56,7 +57,6 @@ namespace BaseApp.App.Views
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-
             // Make sure that closing this window will begin the process of closing the application.
             Application.Current.Shutdown();
         }

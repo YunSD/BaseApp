@@ -3,7 +3,6 @@ using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.Utils;
-using BaseApp.Upms.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;

@@ -1,7 +1,7 @@
 ﻿using BaseApp.App.ViewModels;
 using BaseApp.Core.Utils;
-using OpenCvSharp.WpfExtensions;
 using OpenCvSharp;
+using OpenCvSharp.WpfExtensions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -60,7 +60,8 @@ namespace BaseApp.App.Views
                 {
                     LoadCameraReader();
                 }
-                else {
+                else
+                {
                     UnloadCameraReader();
                 }
             }

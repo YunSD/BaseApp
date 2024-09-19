@@ -2,6 +2,7 @@
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.Utils;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui;
@@ -53,12 +54,15 @@ namespace BaseApp.App.Views
         #endregion Window methods
 
 
+
+
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
             // Make sure that closing this window will begin the process of closing the application.
             Application.Current.Shutdown();
         }
+
 
 
         public void Receive(LoginCompletedRedirectionMessage message)

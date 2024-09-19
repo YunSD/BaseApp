@@ -33,6 +33,7 @@
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/NavigationView/NavigationViewItemHeader.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/NavigationView/NavigationViewItemSeparator.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/NumberBox/NumberBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/ProgressRing/ProgressRing.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/Snackbar/Snackbar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/TextBlock/TextBlock.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BaseApp.Resource;component/Component/Controls/WPFUI/TextBox/TextBox.xaml" />

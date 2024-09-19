@@ -4,11 +4,11 @@
              xmlns:behaviors="clr-namespace:BaseApp.Resource.Behavior;assembly=BaseApp.Resource"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=BaseApp.Resource"
              xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=BaseApp.Resource"
              d:DesignHeight="450"
-             d:DesignWidth="800"
+             d:DesignWidth="600"
              Background="{DynamicResource FormBackgroundBrush}"
              mc:Ignorable="d">
 
@@ -23,24 +23,32 @@
 
     </UserControl.Resources>
 
-    <Grid Margin="0">
+
+    <Grid Margin="0" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <GroupBox Grid.Row="0" Height="Auto" Header="人脸信息录入" Style="{StaticResource BaseFormTitle}">
+        <GroupBox Grid.Row="0" Height="Auto" Background="Black" Header="人脸信息录入" Style="{StaticResource BaseModelTitle}">
             <StackPanel HorizontalAlignment="Center">
-                <ui:Image x:Name="FaceImage" Background="Aqua" CornerRadius="15"  Height="300" BorderBrush="{StaticResource InputBorderBrush}" />
+                <ui:Image x:Name="FaceImage" Height="300" MinWidth="300" Background="Aqua" BorderBrush="{StaticResource InputBorderBrush}" />
             </StackPanel>
         </GroupBox>
 
-        <StackPanel Grid.Row="1" Margin="0,10,35,25" HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="false" Style="{StaticResource MaterialDesignOutlinedDarkButton}">
+        <StackPanel Grid.Row="1">
+            <Button Height="45"
+                    materialDesign:ButtonAssist.CornerRadius="0 0 0 0"
+                    Background="Gray"
+                    BorderBrush="Gray"
+                    Click="Close_Button_Click"
+                    Foreground="{DynamicResource ButtonForegroundBrush}"
+                    Style="{StaticResource MaterialDesignFlatMidBgButton}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="0,0,0,0" Padding="5,0,5,0" FontSize="14" FontWeight="Bold" Text="关闭" />
+                    <TextBlock Margin="0,0,0,0" Padding="8,0,8,0" FontSize="16" FontWeight="Bold" Text="取消" />
                 </StackPanel>
             </Button>
         </StackPanel>
     </Grid>
+
 </UserControl>

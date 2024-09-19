@@ -1,11 +1,6 @@
 ﻿using BaseApp.App.ViewModels;
 using BaseApp.Core.Utils;
-using OpenCvSharp;
-using OpenCvSharp.WpfExtensions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using Wpf.Ui;
 using Wpf.Ui.Controls;
 
 namespace BaseApp.App.Views

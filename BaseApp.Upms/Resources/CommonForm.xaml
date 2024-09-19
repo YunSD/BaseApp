@@ -33,6 +33,48 @@
         </Setter>
     </Style>
 
+    <Style x:Key="BaseModelTitle" BasedOn="{StaticResource MaterialDesignGroupBox}" TargetType="GroupBox">
+        <Setter Property="Padding" Value="20,12,35,12" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp8" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{DynamicResource ThemeBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GroupBox}">
+                    <Grid x:Name="OuterGrid">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{Binding Path=Background, ElementName=PART_ColorZone}" BorderThickness="{TemplateBinding BorderThickness}" />
+                        <DockPanel Margin="{TemplateBinding BorderThickness}">
+                            <materialDesign:ColorZone x:Name="PART_ColorZone"
+                                                      Padding="{TemplateBinding Padding}"
+                                                      materialDesign:ColorZoneAssist.Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ColorZoneAssist.Background)}"
+                                                      materialDesign:ColorZoneAssist.Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ColorZoneAssist.Foreground)}"
+                                                      Background="{TemplateBinding Background}"
+                                                      DockPanel.Dock="Top"
+                                                      Foreground="{StaticResource ButtonForegroundBrush}"
+                                                      Mode="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ColorZoneAssist.Mode)}"
+                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                      UseLayoutRounding="True">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  ContentSource="Header"
+                                                  ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                                                  ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </materialDesign:ColorZone>
+                            <ContentPresenter ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
+
     <Style TargetType="{x:Type materialDesign:SmartHint}">
         <Setter Property="Margin" Value="5,4,0,0" />
     </Style>

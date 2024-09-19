@@ -108,7 +108,8 @@ namespace BaseApp.App.Views
         {
             if (!CameraService.IsOpened())
             {
-                SnackbarService.ShowError("摄像头未正常打开。");
+                SnackbarService.ShowError("摄像头未正常打开,正在重试请稍后。");
+                Task.Run(() => CameraService.ResetCamera());
                 return;
             }
             CompositionTarget.Rendering += CompositionTarget_Rendering;
@@ -117,24 +118,29 @@ namespace BaseApp.App.Views
 
 
 
-        private int frameCounter = 0;
+        private volatile bool isProcess = false;
+        private volatile OpenCvSharp.Mat frame = CameraService.Read();
         private void CompositionTarget_Rendering(object? sender, EventArgs e)
         {
-            if (frameCounter++ % 5 != 0) return;
+            lock (typeof(LoginViewPage)) {
+                if (isProcess) return;
+                isProcess = true;
+            }
 
-            Task.Run(() =>
+            Task.Delay(50).ContinueWith((e) =>
             {
-                OpenCvSharp.Mat frame = CameraService.Read();
+                frame = CameraService.Read();
                 if (!frame.Empty())
                 {
                     FaceUtil.FaceDetect(frame);
-                    Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 2, frame.Height / 2));
+                    Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 4, frame.Height / 4));
                     Dispatcher.Invoke(() =>
                     {
                         var bitmapSource = frame.ToBitmapSource();
                         FaceImage.Source = bitmapSource;
                     });
                 }
+                isProcess = false;
             });
         }
 

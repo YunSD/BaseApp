@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Win32;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
@@ -94,6 +95,7 @@ namespace MaterialDemo
             try
             {
                 splashScreen.Show(false);
+                Task.Run(() => CameraService.Empty());
                 _host.Start();
                 ServiceProviderUtil.SetServiceProvider(_host.Services.GetRequiredService<IServiceProvider>());
             }

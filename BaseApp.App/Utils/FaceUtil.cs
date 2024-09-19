@@ -51,18 +51,19 @@ namespace BaseApp.App.Utils
         }
 
 
-        public static void FaceDetect(OpenCvSharp.Mat mat)
+        public static bool FaceDetect(OpenCvSharp.Mat mat)
         {
-            Rect[] rects = cascadeClassifier.DetectMultiScale(mat, 1.05, 15, OpenCvSharp.HaarDetectionTypes.ScaleImage, new OpenCvSharp.Size(100, 100));
-            if (rects.Length == 1)
+            Rect[] rects = cascadeClassifier.DetectMultiScale(mat, 1.05, 20, OpenCvSharp.HaarDetectionTypes.ScaleImage, new OpenCvSharp.Size(150, 150));
+            if (rects.Length > 0)
             {
-                Mat faceROI = new Mat(mat, rects[0]);
-                DrawFocusRectangle(mat, rects[0], 50, OpenCvSharp.Scalar.Green, 8);
+                DrawFocusRectangle(mat, ExpandRect(rects[0], 30), 50, OpenCvSharp.Scalar.Green, 8);
+                return true;
             }
+            return false;
         }
 
 
-        private static Rect ExpandRect(Rect rect, int padding)
+        public static Rect ExpandRect(Rect rect, int padding)
         {
             // 计算扩展后的矩形坐标和尺寸
             int x = rect.X - padding;
@@ -73,25 +74,23 @@ namespace BaseApp.App.Utils
             return new Rect(x, y, width, height);
         }
 
-        private static void DrawFocusRectangle(Mat mat, Rect rect, int cornerLength, Scalar color, int thickness)
+        public static void DrawFocusRectangle(Mat mat, Rect rect, int cornerLength, Scalar color, int thickness)
         {
-            rect = ExpandRect(rect, 30);
-
             // 左上角
-            Cv2.Line(mat, new OpenCvSharp.Point(rect.X, rect.Y), new OpenCvSharp.Point(rect.X + cornerLength, rect.Y), color, thickness); // 水平线
-            Cv2.Line(mat, new OpenCvSharp.Point(rect.X, rect.Y), new OpenCvSharp.Point(rect.X, rect.Y + cornerLength), color, thickness); // 垂直线
+            Cv2.Line(mat, new OpenCvSharp.Point(rect.X, rect.Y), new OpenCvSharp.Point(rect.X + cornerLength, rect.Y), color, thickness, lineType: LineTypes.AntiAlias); // 水平线
+            Cv2.Line(mat, new OpenCvSharp.Point(rect.X, rect.Y), new OpenCvSharp.Point(rect.X, rect.Y + cornerLength), color, thickness, lineType: LineTypes.AntiAlias); // 垂直线
 
             // 右上角
-            Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y), new OpenCvSharp.Point(rect.X + rect.Width - cornerLength, rect.Y), color, thickness); // 水平线
-            Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y), new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + cornerLength), color, thickness); // 垂直线
+            Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y), new OpenCvSharp.Point(rect.X + rect.Width - cornerLength, rect.Y), color, thickness, lineType: LineTypes.AntiAlias); // 水平线
+            Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y), new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + cornerLength), color, thickness, lineType: LineTypes.AntiAlias); // 垂直线
 
             // 左下角
-            Cv2.Line(mat, new OpenCvSharp.Point(rect.X, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + cornerLength, rect.Y + rect.Height), color, thickness); // 水平线
-            Cv2.Line(mat, new OpenCvSharp.Point(rect.X, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X, rect.Y + rect.Height - cornerLength), color, thickness); // 垂直线
+            Cv2.Line(mat, new OpenCvSharp.Point(rect.X, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + cornerLength, rect.Y + rect.Height), color, thickness, lineType: LineTypes.AntiAlias); // 水平线
+            Cv2.Line(mat, new OpenCvSharp.Point(rect.X, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X, rect.Y + rect.Height - cornerLength), color, thickness, lineType: LineTypes.AntiAlias); // 垂直线
 
             // 右下角
-            Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + rect.Width - cornerLength, rect.Y + rect.Height), color, thickness); // 水平线
-            Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height - cornerLength), color, thickness); // 垂直线
+            Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + rect.Width - cornerLength, rect.Y + rect.Height), color, thickness, lineType: LineTypes.AntiAlias); // 水平线
+            Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height - cornerLength), color, thickness, lineType: LineTypes.AntiAlias); // 垂直线
         }
     }
 }

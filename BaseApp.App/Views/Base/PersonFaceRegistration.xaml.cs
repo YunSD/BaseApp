@@ -2,11 +2,10 @@
 {
     using BaseApp.App.Services;
     using BaseApp.App.Utils;
-    using BaseApp.App.ViewModels;
+    using BaseApp.App.ViewModels.Base;
     using BaseApp.Core.Utils;
     using BaseApp.Resource.Controls;
     using log4net;
-    using log4net.Repository.Hierarchy;
     using MaterialDesignThemes.Wpf;
     using OpenCvSharp;
     using OpenCvSharp.WpfExtensions;
@@ -21,12 +20,14 @@
     {
 
         private ILog logger = LogManager.GetLogger(nameof(PersonFaceRegistration));
+        private readonly PersonFaceRegistrationViewModel ViewModel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonFaceRegistration"/> class.
         /// </summary>
-        public PersonFaceRegistration()
+        public PersonFaceRegistration(PersonFaceRegistrationViewModel ViewModel)
         {
+            this.ViewModel = ViewModel;
             DataContext = this;
             InitializeComponent();
             LoadCameraReader();
@@ -65,6 +66,7 @@
 
             Task.Run(async () =>
             {
+                bool isVerify = false;
                 try
                 {
                     await Task.Delay(50);
@@ -100,9 +102,8 @@
                                     Dispatcher.Invoke(() => {
                                         UnloadCameraReader();
                                         DialogHost.Show(new WaitingDialog("正在处理中..."), BaseConstant.RootDialog);
-                                        float[]? by = FaceUtil.GenerateEmbedding(frame);
-                                        logger.Debug(by==null);
                                     });
+                                    isVerify = true;
                                 }
                             }
                             else
@@ -117,6 +118,28 @@
                                 FaceImage.Source = bitmapSource;
                             });
                         }
+
+                        if (isVerify) {
+
+                            if (ViewModel.FaceRegistration(frame)) {
+                                Dispatcher.Invoke(() => {
+                                    DialogHost.Close(BaseConstant.BaseDialog);
+                                    DialogHost.Close(BaseConstant.RootDialog);
+                                    SnackbarService.ShowSuccess("人脸信息录入成功！");
+                                });
+                                return;
+                            }
+
+                            isReady = false;
+                            Dispatcher.Invoke(() => {
+                                DialogHost.Close(BaseConstant.RootDialog);
+                                SnackbarService.ShowError("人脸信息录入失败！");
+                                LoadCameraReader();
+                            });
+                            return;
+
+                        }
+
                     }
                 }
                 finally

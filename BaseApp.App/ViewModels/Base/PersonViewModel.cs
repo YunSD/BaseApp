@@ -1,4 +1,5 @@
-﻿using BaseApp.App.Views;
+﻿using BaseApp.App.ViewModels.Base;
+using BaseApp.App.Views;
 using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.Security.Messages;
@@ -130,7 +131,9 @@ namespace BaseApp.App.ViewModels
         [RelayCommand]
         private void OpenFaceRegistionPage()
         {
-            PersonFaceRegistration page = new PersonFaceRegistration();
+            // 打开人脸录入页
+            PersonFaceRegistrationViewModel faceRegistrationViewModel = ServiceProviderUtil.GetRequiredService<PersonFaceRegistrationViewModel>();
+            PersonFaceRegistration page = new PersonFaceRegistration(faceRegistrationViewModel);
             DialogHost.Show(page, BaseConstant.BaseDialog);
         }
 

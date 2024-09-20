@@ -25,8 +25,15 @@ namespace BaseApp.Core.Domain
         [Column("info_card")]
         public string? InfoCard { get; set; }
 
+
+        [Column("info_face_flag")]
+        public BaseStatusEnum InfoFaceFlag { get; set; }
+
         [Column("info_face")]
         public string? InfoFace { get; set; }
+
+        [Column("info_touch_flag")]
+        public BaseStatusEnum InfoTouchFlag { get; set; }
 
         [Column("info_touch")]
         public string? InfoTouch { get; set; }
@@ -36,5 +43,12 @@ namespace BaseApp.Core.Domain
 
 
         public bool IsLocked() { return BaseStatusEnum.EXCEPTION.Equals(LockFlag); }
+
+        public SysUser()
+        {
+            InfoFaceFlag = BaseStatusEnum.EXCEPTION;
+            InfoTouchFlag = BaseStatusEnum.EXCEPTION;
+            LockFlag = BaseStatusEnum.NORMAL;
+        }
     }
 }

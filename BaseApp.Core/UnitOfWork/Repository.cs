@@ -1027,15 +1027,15 @@ namespace BaseApp.Core.UnitOfWork
         }
 
 
-        public void excludeEntityField(IList<TEntity> entities, List<string> properties)
+        public void ignoreOtherEntityField(IList<TEntity> entities, List<string> properties)
         {
             foreach (var item in entities)
             {
-                this.excludeEntityField(item, properties);
+                this.ignoreOtherEntityField(item, properties);
             }
         }
 
-        public void excludeEntityField(TEntity entity, List<string> properties)
+        public void ignoreOtherEntityField(TEntity entity, List<string> properties)
         {
             foreach (PropertyEntry item in _dbContext.Entry(entity).Properties)
             {

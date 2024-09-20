@@ -32,7 +32,7 @@
 
         <GroupBox Grid.Row="0" Height="Auto" Background="Black" Header="人脸信息录入" Style="{StaticResource BaseModelTitle}">
             <StackPanel HorizontalAlignment="Center">
-                <ui:Image x:Name="FaceImage" Height="300" MinWidth="300" Background="Aqua" BorderBrush="{StaticResource InputBorderBrush}" />
+                <ui:Image x:Name="FaceImage" Height="300" MinWidth="300" Background="Aqua" BorderBrush="{StaticResource InputBorderBrush}" IsTabStop="False" />
             </StackPanel>
         </GroupBox>
 

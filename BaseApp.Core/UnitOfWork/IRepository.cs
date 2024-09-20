@@ -487,8 +487,8 @@ namespace BaseApp.Core.UnitOfWork
         /// </summary>
         /// <param name="entities"></param>
         /// <param name="properties"></param>
-        void excludeEntityField(IList<TEntity> entities, List<string> properties);
+        void ignoreOtherEntityField(IList<TEntity> entities, List<string> properties);
 
-        void excludeEntityField(TEntity entity, List<string> properties);
+        void ignoreOtherEntityField(TEntity entity, List<string> properties);
     }
 }

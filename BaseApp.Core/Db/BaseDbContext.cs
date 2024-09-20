@@ -21,6 +21,8 @@ namespace BaseApp.Core.Db
         {
             modelBuilder.Entity<SysUser>(e =>
             {
+                e.Property(e => e.InfoFaceFlag).HasConversion(v => v.ToString(), v => (BaseStatusEnum)Enum.Parse(typeof(BaseStatusEnum), v));
+                e.Property(e => e.InfoTouchFlag).HasConversion(v => v.ToString(), v => (BaseStatusEnum)Enum.Parse(typeof(BaseStatusEnum), v));
                 e.Property(e => e.LockFlag).HasConversion(v => v.ToString(), v => (BaseStatusEnum)Enum.Parse(typeof(BaseStatusEnum), v));
             });
 

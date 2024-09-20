@@ -1,54 +1,14 @@
-﻿using FaceAiSharp;
-using OpenCvSharp;
-using OpenCvSharp.Face;
-using SixLabors.ImageSharp.PixelFormats;
+﻿using OpenCvSharp;
 using System.IO;
 
 namespace BaseApp.App.Utils
 {
-    public class FaceUtil
+    public class CVUtil
     {
         private static readonly string ModelDirectory = "Resources\\models";
 
         private static readonly OpenCvSharp.CascadeClassifier cascadeClassifier = new OpenCvSharp
             .CascadeClassifier(Path.Combine(ModelDirectory, "haarcascade_frontalface_default.xml"));
-
-        private static readonly LBPHFaceRecognizer lBPHFaceRecognizer = LBPHFaceRecognizer.Create();
-
-        private static readonly IFaceDetectorWithLandmarks faceDetector = FaceAiSharpBundleFactory.CreateFaceDetectorWithLandmarks();
-        private static readonly IFaceEmbeddingsGenerator faceEmbeddings = FaceAiSharpBundleFactory.CreateFaceEmbeddingsGenerator();
-
-
-        /// <summary>
-        /// 通过 FaceAI 获取人脸的数据矩阵
-        /// </summary>
-        /// <param name="frame"></param>
-        /// <returns></returns>
-        /// <exception cref="NullReferenceException"></exception>
-        public static float[]? GenerateEmbedding(OpenCvSharp.Mat frame)
-        {
-            if (frame.Empty()) throw new NullReferenceException();
-
-            SixLabors.ImageSharp.Image<Rgb24> image = SixLabors.ImageSharp.Image.Load<Rgb24>(frame.ToMemoryStream());
-
-            IReadOnlyCollection<FaceDetectorResult> faces = faceDetector.DetectFaces(image);
-
-            float[]? result = null;
-            if (faces.Count == 1)
-            {
-                faceEmbeddings.AlignFaceUsingLandmarks(image, faces.First().Landmarks!);
-                result = faceEmbeddings.GenerateEmbedding(image);
-            }
-            image.Dispose();
-            return result;
-        }
-
-        public static bool DotEmbedding(float[] first, float[] second)
-        {
-            float dot = FaceAiSharp.Extensions.GeometryExtensions.Dot(first, second);
-            if (dot >= 0.60) return true;
-            return false;
-        }
 
 
         public static bool FaceDetect(OpenCvSharp.Mat mat)

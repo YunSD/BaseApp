@@ -1,16 +1,10 @@
-﻿using BaseApp.App.Utils;
-using BaseApp.App.Views;
+﻿using BaseApp.App.Services;
 using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Security;
 using log4net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace BaseApp.App.ViewModels.Base
 {
@@ -19,15 +13,17 @@ namespace BaseApp.App.ViewModels.Base
         private ILog logger = LogManager.GetLogger(nameof(PersonFaceRegistrationViewModel));
         private readonly IUnitOfWork _unitOfWork;
 
-        public PersonFaceRegistrationViewModel(IUnitOfWork unitOfWork) {
+        public PersonFaceRegistrationViewModel(IUnitOfWork unitOfWork)
+        {
             this._unitOfWork = unitOfWork;
         }
 
 
-        public bool FaceRegistration(OpenCvSharp.Mat frame) {
+        public bool FaceRegistration(OpenCvSharp.Mat frame)
+        {
             try
             {
-                float[]? embedding = FaceUtil.GenerateEmbedding(frame);
+                float[]? embedding = FaceRecognitionService.GenerateEmbedding(frame);
                 if (embedding == null) return false;
 
                 string em_str = JsonSerializer.Serialize(embedding);
@@ -54,7 +50,7 @@ namespace BaseApp.App.ViewModels.Base
                 logger.Error(ex);
                 return false;
             }
-            
+
         }
 
 

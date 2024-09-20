@@ -1,9 +1,7 @@
-﻿using BaseApp.App.Services;
-using BaseApp.App.Views;
+﻿using BaseApp.App.Views;
 using BaseApp.App.Windows;
 using BaseApp.Core.Db;
 using BaseApp.Core.Extensions;
-using BaseApp.Core.Utils;
 using BaseApp.Resource.Services;
 using BaseApp.Upms.Services;
 using log4net;
@@ -12,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Win32;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
@@ -95,9 +92,7 @@ namespace MaterialDemo
             try
             {
                 splashScreen.Show(false);
-                Task.Run(() => CameraService.Empty());
                 _host.Start();
-                ServiceProviderUtil.SetServiceProvider(_host.Services.GetRequiredService<IServiceProvider>());
             }
             catch (Exception ex)
             {
@@ -130,7 +125,6 @@ namespace MaterialDemo
         /// </summary>
         private async void OnExit(object sender, ExitEventArgs e)
         {
-            CameraService.Dispose();
             await _host.StopAsync();
             _host.Dispose();
         }

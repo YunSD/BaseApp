@@ -164,7 +164,7 @@
 
                         <StackPanel x:Name="FACE_RECONGNITION" Visibility="{Binding LoginViewModel.LoginType, Converter={StaticResource BaseVisibilityConverter}, ConverterParameter=FACE_RECONGNITION}">
                             <Border HorizontalAlignment="Center" ClipToBounds="True">
-                                <ui:Image x:Name="FaceImage" Height="190" BorderBrush="{StaticResource InputBorderBrush}" BorderThickness="3" CornerRadius="15" />
+                                <Image x:Name="FaceImage" Height="190" Source="pack://application:,,,/Assets/icon.png" />
                             </Border>
                         </StackPanel>
 

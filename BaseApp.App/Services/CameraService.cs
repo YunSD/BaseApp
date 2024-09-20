@@ -1,26 +1,41 @@
-﻿using Microsoft.Win32;
-using OpenCvSharp;
+﻿using OpenCvSharp;
 
 namespace BaseApp.App.Services
 {
     public class CameraService
     {
 
-        private static volatile OpenCvSharp.VideoCapture videoCapture;
+        private static volatile OpenCvSharp.VideoCapture? videoCapture;
 
-        private static volatile bool isProcess = true;
+        private static SemaphoreSlim processSemaphore = new SemaphoreSlim(1, 1);
 
-        static CameraService()
+        public static void ConnectCamera()
         {
-            videoCapture = new OpenCvSharp.VideoCapture(0);
-            videoCapture.Set(VideoCaptureProperties.FrameWidth, 1080);
-            videoCapture.Set(VideoCaptureProperties.FrameHeight, 720);
-            isProcess = false;
+            if (!processSemaphore.Wait(0)) return;
+            try
+            {
+                videoCapture?.Dispose();
+                videoCapture = new OpenCvSharp.VideoCapture(0);
+                videoCapture.Set(VideoCaptureProperties.FrameWidth, 1080);
+                videoCapture.Set(VideoCaptureProperties.FrameHeight, 720);
+            }
+            finally
+            {
+                processSemaphore.Release();
+            }
         }
 
         public static bool IsOpened()
         {
-            return videoCapture.IsOpened();
+            if (!processSemaphore.Wait(0)) return false;
+            try
+            {
+                return videoCapture?.IsOpened() ?? false;
+            }
+            finally
+            {
+                processSemaphore.Release();
+            }
         }
 
         public static OpenCvSharp.Mat Read()
@@ -32,40 +47,33 @@ namespace BaseApp.App.Services
 
         public static void Read(OpenCvSharp.Mat frame)
         {
-            if (!videoCapture.IsOpened()) return;
-            bool flag = videoCapture.Read(frame);
-            if ((!flag || videoCapture.Brightness < 0) && !isProcess)
+            if (!processSemaphore.Wait(0)) return;
+            try
             {
-                ResetCamera();
+                if (videoCapture == null || !videoCapture.IsOpened() || !videoCapture.Read(frame))
+                {
+                    ConnectCamera();
+                }
+            }
+            finally
+            {
+                processSemaphore.Release();
             }
         }
 
 
         public static void Dispose()
         {
-            if (videoCapture.IsEnabledDispose) {
-                videoCapture.Dispose();
+            processSemaphore.Wait();
+
+            try
+            {
+                videoCapture?.Dispose();
+            }
+            finally
+            {
+                processSemaphore.Release();
             }
         }
-
-        
-        public static void ResetCamera() {
-            lock (typeof(CameraService)){
-                if (isProcess) return;
-                CameraService.isProcess = true;
-
-                if (videoCapture != null)
-                {
-                    videoCapture.Dispose();
-                }
-                videoCapture = new OpenCvSharp.VideoCapture(0, OpenCvSharp.VideoCaptureAPIs.DSHOW);
-                videoCapture.Set(VideoCaptureProperties.FrameWidth, 1080);
-                videoCapture.Set(VideoCaptureProperties.FrameHeight, 720);
-                
-                CameraService.isProcess = false;
-            }
-        }
-
-        public static void Empty() { }
     }
 }

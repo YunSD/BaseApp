@@ -3,7 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using BaseApp.App.Services;
 using BaseApp.App.Views;
+using BaseApp.Core.Utils;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
 
@@ -34,6 +36,7 @@ namespace MaterialDemo.Services
         /// <param name="cancellationToken">Indicates that the shutdown process should no longer be graceful.</param>
         public async Task StopAsync(CancellationToken cancellationToken)
         {
+            CameraService.Dispose();
             await Task.CompletedTask;
         }
 
@@ -42,6 +45,11 @@ namespace MaterialDemo.Services
         /// </summary>
         private async Task HandleActivationAsync()
         {
+            _ = Task.Run(() => CameraService.ConnectCamera());
+            _ = Task.Run(() => FaceRecognitionService.LoadData());
+
+            ServiceProviderUtil.SetServiceProvider(_serviceProvider);
+
             if (!Application.Current.Windows.OfType<MainWindow>().Any())
             {
                 _mainWindow = (

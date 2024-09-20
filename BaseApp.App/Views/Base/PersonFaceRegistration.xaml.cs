@@ -75,10 +75,10 @@
                     {
                         if (!frame.Empty())
                         {
-                            Rect rect = FaceUtil.ExpandRect(new Rect(0, 0, frame.Width, frame.Height), -60);
+                            Rect rect = CVUtil.ExpandRect(new Rect(0, 0, frame.Width, frame.Height), -60);
 
                             Scalar color = Scalar.Red;
-                            if (FaceUtil.FaceDetect(frame))
+                            if (CVUtil.FaceDetect(frame))
                             {
                                 color = Scalar.White;
                                 if (!isReady)
@@ -99,7 +99,8 @@
                                 else
                                 {
                                     // 人像分析
-                                    Dispatcher.Invoke(() => {
+                                    Dispatcher.Invoke(() =>
+                                    {
                                         UnloadCameraReader();
                                         DialogHost.Show(new WaitingDialog("正在处理中..."), BaseConstant.RootDialog);
                                     });
@@ -110,7 +111,7 @@
                             {
                                 isReady = false;
                             }
-                            FaceUtil.DrawFocusRectangle(frame, rect, 50, color, 10);
+                            CVUtil.DrawFocusRectangle(frame, rect, 50, color, 10);
                             Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 2, frame.Height / 2));
                             Dispatcher.Invoke(() =>
                             {
@@ -119,19 +120,23 @@
                             });
                         }
 
-                        if (isVerify) {
-
-                            if (ViewModel.FaceRegistration(frame)) {
-                                Dispatcher.Invoke(() => {
+                        if (isVerify)
+                        {
+                            if (ViewModel.FaceRegistration(frame))
+                            {
+                                Dispatcher.Invoke(() =>
+                                {
                                     DialogHost.Close(BaseConstant.BaseDialog);
                                     DialogHost.Close(BaseConstant.RootDialog);
                                     SnackbarService.ShowSuccess("人脸信息录入成功！");
                                 });
+                                FaceRecognitionService.LoadData();
                                 return;
                             }
 
                             isReady = false;
-                            Dispatcher.Invoke(() => {
+                            Dispatcher.Invoke(() =>
+                            {
                                 DialogHost.Close(BaseConstant.RootDialog);
                                 SnackbarService.ShowError("人脸信息录入失败！");
                                 LoadCameraReader();

@@ -58,7 +58,7 @@ namespace BaseApp.App.Views
                 return;
             }
 
-            _ = Navigate(typeof(UserViewPage));
+            _ = Navigate(typeof(FolderViewPage));
         }
 
     }

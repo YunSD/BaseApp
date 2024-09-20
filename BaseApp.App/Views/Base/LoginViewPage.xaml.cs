@@ -11,10 +11,12 @@ using log4net;
 using MaterialDesignThemes.Wpf;
 using OpenCvSharp;
 using OpenCvSharp.WpfExtensions;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Wpf.Ui;
 
 namespace BaseApp.App.Views
@@ -39,7 +41,6 @@ namespace BaseApp.App.Views
             this.DataContext = this;
 
             InitializeComponent();
-
             WeakReferenceMessenger.Default.Register<SwitchLoginMessage>(this);
             WeakReferenceMessenger.Default.Register<LoginCompletedMessage>(this);
 
@@ -51,7 +52,7 @@ namespace BaseApp.App.Views
 
             string password = PasswordBox.Password;
 
-            bool flag = await LoginViewModel.Login(password);
+            bool flag = await LoginViewModel.LoginByPassword(password);
             if (!flag) SnackbarService.ShowError("密码错误");
 
             if (DialogHost.IsDialogOpen(BaseConstant.BaseDialog)) DialogHost.Close(BaseConstant.BaseDialog);
@@ -109,39 +110,45 @@ namespace BaseApp.App.Views
             if (!CameraService.IsOpened())
             {
                 SnackbarService.ShowError("摄像头未正常打开,正在重试请稍后。");
-                Task.Run(() => CameraService.ResetCamera());
+                Task.Run(() => CameraService.ConnectCamera());
                 return;
             }
             CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
 
 
-
-
-        private volatile bool isProcess = false;
-        private volatile OpenCvSharp.Mat frame = CameraService.Read();
+        private SemaphoreSlim IsProcess = new SemaphoreSlim(1, 1);
         private void CompositionTarget_Rendering(object? sender, EventArgs e)
         {
-            lock (typeof(LoginViewPage)) {
-                if (isProcess) return;
-                isProcess = true;
-            }
-
-            Task.Delay(50).ContinueWith((e) =>
-            {
-                frame = CameraService.Read();
-                if (!frame.Empty())
+            if (!IsProcess.Wait(0)) return;
+            Task.Run(async () => {
+                try
                 {
-                    FaceUtil.FaceDetect(frame);
-                    Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 4, frame.Height / 4));
-                    Dispatcher.Invoke(() =>
+                    await Task.Delay(50);
+                    using (OpenCvSharp.Mat frame = CameraService.Read())
                     {
-                        var bitmapSource = frame.ToBitmapSource();
-                        FaceImage.Source = bitmapSource;
-                    });
+                        if (!frame.Empty())
+                        {
+                            if (CVUtil.FaceDetect(frame))
+                            {
+                                LoginViewModel.LoginByFaceRecognition(frame);
+                            }
+                            Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 4, frame.Height / 4));
+
+                            Dispatcher.Invoke(() =>
+                            {
+                                BitmapSource bitmapSource = frame.ToBitmapSource();
+                                FaceImage.Source = bitmapSource;
+                            });
+                        }
+                    }
                 }
-                isProcess = false;
+                finally
+                {
+                    IsProcess.Release();
+                }
             });
+            
         }
 
         private void UnloadCameraReader()
@@ -151,7 +158,8 @@ namespace BaseApp.App.Views
 
         public void Receive(LoginCompletedMessage message)
         {
-            UnloadCameraReader();
+            WeakReferenceMessenger.Default.UnregisterAll(this);
+            Dispatcher.Invoke(() => UnloadCameraReader());
         }
     }
 }

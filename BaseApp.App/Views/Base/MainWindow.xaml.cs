@@ -2,7 +2,6 @@
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.Utils;
 using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui;
@@ -67,7 +66,8 @@ namespace BaseApp.App.Views
 
         public void Receive(LoginCompletedRedirectionMessage message)
         {
-            this.Navigate(ServiceProviderUtil.GetRequiredService<HomeViewPage>());
+            Dispatcher.Invoke(()=> this.Navigate(ServiceProviderUtil.GetRequiredService<HomeViewPage>()));
+            
         }
 
         public void Receive(LogoutMessage message)

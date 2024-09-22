@@ -8,6 +8,7 @@
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,6 +35,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Assets\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Views\Business\" />
   </ItemGroup>
 
@@ -46,6 +51,15 @@
     <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.10.0.20240616" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.4" />
+    <PackageReference Include="ViewFaceCore" Version="0.3.8" />
+    <PackageReference Include="ViewFaceCore.all_models" Version="6.0.7" />
+    <PackageReference Include="ViewFaceCore.Extension.SkiaSharp" Version="0.3.7" />
+    <PackageReference Include="ViewFaceCore.model.face_detector" Version="6.0.7" />
+    <PackageReference Include="ViewFaceCore.model.face_recognizer" Version="6.0.7" />
+    <PackageReference Include="ViewFaceCore.model.face_recognizer_light" Version="6.0.7" />
+    <PackageReference Include="ViewFaceCore.model.fas_first" Version="6.0.7" />
+    <PackageReference Include="ViewFaceCore.model.fas_second" Version="6.0.7" />
+    <PackageReference Include="ViewFaceCore.runtime.win.x64" Version="6.0.7" />
   </ItemGroup>
 
   <ItemGroup>

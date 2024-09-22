@@ -122,24 +122,25 @@ namespace BaseApp.App.Views
         {
             if (!IsProcess.Wait(0)) return;
             Task.Run(async () => {
-                try
+            try
+            {
+                await Task.Delay(50);
+                using (OpenCvSharp.Mat frame = CameraService.Read())
                 {
-                    await Task.Delay(50);
-                    using (OpenCvSharp.Mat frame = CameraService.Read())
+                    if (!frame.Empty())
                     {
-                        if (!frame.Empty())
+                        if (CVUtil.FaceDetect(frame))
                         {
-                            if (CVUtil.FaceDetect(frame))
-                            {
-                                LoginViewModel.LoginByFaceRecognition(frame);
-                            }
-                            Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 4, frame.Height / 4));
+                            CVUtil.AntiSpoofingDemo(frame);
+                            LoginViewModel.LoginByFaceRecognition(frame);
+                        }
+                        Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 4, frame.Height / 4));
 
-                            Dispatcher.Invoke(() =>
-                            {
-                                BitmapSource bitmapSource = frame.ToBitmapSource();
-                                FaceImage.Source = bitmapSource;
-                            });
+                        Dispatcher.Invoke(() =>
+                        {
+                            BitmapSource bitmapSource = frame.ToBitmapSource();
+                            FaceImage.Source = bitmapSource;
+                        });
                         }
                     }
                 }

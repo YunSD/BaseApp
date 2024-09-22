@@ -1,5 +1,12 @@
 ﻿using OpenCvSharp;
+using OpenCvSharp.WpfExtensions;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
+using System.Threading.Channels;
+using System.Windows.Media.Media3D;
+using ViewFaceCore.Core;
+using ViewFaceCore.Model;
 
 namespace BaseApp.App.Utils
 {
@@ -52,5 +59,6 @@ namespace BaseApp.App.Utils
             Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + rect.Width - cornerLength, rect.Y + rect.Height), color, thickness, lineType: LineTypes.AntiAlias); // 水平线
             Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height - cornerLength), color, thickness, lineType: LineTypes.AntiAlias); // 垂直线
         }
+
     }
 }

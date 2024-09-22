@@ -10,7 +10,7 @@ namespace BaseApp.Core.Domain
 
         // 每页显示多少条
         [ObservableProperty]
-        public int pageSize = 8;
+        public int pageSize = 20;
 
         // 总条目数
         [ObservableProperty]

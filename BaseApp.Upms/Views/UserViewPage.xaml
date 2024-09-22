@@ -113,8 +113,57 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="*" Binding="{Binding Username}" CanUserSort="False" Header="登陆名" />
                     <DataGridTextColumn Width="*" Binding="{Binding Name}" CanUserSort="False" Header="姓名" />
+                    <DataGridTextColumn Width="*" Binding="{Binding InfoCard}" CanUserSort="False" Header="员工卡号" />
                     <DataGridTextColumn Width="*" Binding="{Binding Phone}" CanUserSort="False" Header="电话" />
-                    <DataGridTemplateColumn Width="*" CanUserResize="False" Header="状态">
+                    <DataGridTemplateColumn Width="*" CanUserResize="False" Header="人脸信息">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Width="Auto" HorizontalAlignment="Left" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4">
+                                    <TextBlock Padding="10,2,10,2" FontSize="12" Foreground="white">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding InfoFaceFlag}" Value="0">
+                                                        <Setter Property="Background" Value="LightSeaGreen" />
+                                                        <Setter Property="Text" Value="已录入" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding InfoFaceFlag}" Value="1">
+                                                        <Setter Property="Background" Value="Gray" />
+                                                        <Setter Property="Text" Value="未录入" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="*" CanUserResize="False" Header="指纹信息">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Width="Auto" HorizontalAlignment="Left" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4">
+                                    <TextBlock Padding="10,2,10,2" FontSize="12" Foreground="white">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding InfoTouchFlag}" Value="0">
+                                                        <Setter Property="Background" Value="LightSeaGreen" />
+                                                        <Setter Property="Text" Value="已录入" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding InfoTouchFlag}" Value="1">
+                                                        <Setter Property="Background" Value="Gray" />
+                                                        <Setter Property="Text" Value="未录入" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="*" CanUserResize="False" Header="登录状态">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Width="Auto" HorizontalAlignment="Left" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4">

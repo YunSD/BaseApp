@@ -11,6 +11,5 @@ namespace BaseApp.App.Windows
     {
         [ObservableProperty]
         private string? _applicationTitle = System.Configuration.ConfigurationManager.AppSettings["PROJECT_NAME"];
-
     }
 }

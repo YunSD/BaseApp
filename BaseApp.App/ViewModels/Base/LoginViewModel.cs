@@ -58,7 +58,7 @@ namespace BaseApp.App.ViewModels
             if (status) WeakReferenceMessenger.Default.Send(new LoginCompletedMessage(userDetailsService.LoadSecurityUser(user)));
             return status;
         }
-        private SemaphoreSlim IsProcess = new SemaphoreSlim(1, 1);
+        private static SemaphoreSlim IsProcess = new SemaphoreSlim(1, 1);
         public void LoginByFaceRecognition(OpenCvSharp.Mat mat)
         {
             OpenCvSharp.Mat frame = mat.Clone();

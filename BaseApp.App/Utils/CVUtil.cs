@@ -1,12 +1,14 @@
-﻿using OpenCvSharp;
+﻿using FaceAiSharp;
+using FaceONNX;
+using OpenCvSharp;
+using OpenCvSharp.Extensions;
 using OpenCvSharp.WpfExtensions;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading.Channels;
 using System.Windows.Media.Media3D;
-using ViewFaceCore.Core;
-using ViewFaceCore.Model;
+using UMapx.Core;
 
 namespace BaseApp.App.Utils
 {
@@ -17,16 +19,36 @@ namespace BaseApp.App.Utils
         private static readonly OpenCvSharp.CascadeClassifier cascadeClassifier = new OpenCvSharp
             .CascadeClassifier(Path.Combine(ModelDirectory, "haarcascade_frontalface_default.xml"));
 
-
-        public static bool FaceDetect(OpenCvSharp.Mat mat)
+        private static FaceAntiSpoofing FaceAntiSpoofing = FaceAiSharpBundleFactory.CreateFaceAntiSpoofingDetector();
+        public static bool FaceDetect(OpenCvSharp.Mat frame)
         {
-            Rect[] rects = cascadeClassifier.DetectMultiScale(mat, 1.05, 20, OpenCvSharp.HaarDetectionTypes.ScaleImage, new OpenCvSharp.Size(150, 150));
-            if (rects.Length > 0)
+            Rect[] rects = cascadeClassifier.DetectMultiScale(frame, 1.05, 20, OpenCvSharp.HaarDetectionTypes.ScaleImage, new OpenCvSharp.Size(150, 150));
+            if (rects.Length == 1)
             {
-                DrawFocusRectangle(mat, ExpandRect(rects[0], 30), 50, OpenCvSharp.Scalar.Green, 8);
+
+                FaceAntiSpoofing.DetectorConfidence(frame, rects[0]);
+                //DrawFocusRectangle(mat, ExpandRect(rects[0], 30), 50, OpenCvSharp.Scalar.Green, 8);
                 return true;
             }
             return false;
+        }
+
+
+        public static bool FaceDepthDetect(OpenCvSharp.Mat mat) {
+            try
+            {
+                var labels = FaceDepthClassifier.Labels;
+                FaceDepthClassifier faceDepthClassifier = new FaceDepthClassifier();
+                Bitmap bitmap = BitmapConverter.ToBitmap(mat);
+                var output = faceDepthClassifier.Forward(bitmap);
+                var max = Matrice.Max(output, out int gender);
+                string re = labels[gender];
+                return gender == 1;
+            }
+            catch (Exception ex) { 
+                Console.WriteLine(ex.Message);
+            }
+           return false;
         }
 
 
@@ -59,6 +81,10 @@ namespace BaseApp.App.Utils
             Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + rect.Width - cornerLength, rect.Y + rect.Height), color, thickness, lineType: LineTypes.AntiAlias); // 水平线
             Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height - cornerLength), color, thickness, lineType: LineTypes.AntiAlias); // 垂直线
         }
+
+
+
+        
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Georg Jung. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using BaseApp.App.Utils;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Microsoft.ML.OnnxRuntime;
@@ -38,6 +39,12 @@ public static class FaceAiSharpBundleFactory
         return new OpenVinoOpenClosedEye0001(opt, sessionOptions);
     }
 
+    public static FaceAntiSpoofing CreateFaceAntiSpoofingDetector(SessionOptions? sessionOptions = null)
+    {
+        var modelPath = Path.Combine(GetExeDir(), "resources", "onnx", "v1se.onnx");
+        return new FaceAntiSpoofing(modelPath);
+    }
+
     private static IMemoryCache CreateMemoryCache()
     {
         var opts = new MemoryCacheOptions();
@@ -46,4 +53,11 @@ public static class FaceAiSharpBundleFactory
     }
 
     private static string GetExeDir() => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
+
+
+    public static byte[] GetDepthGooglenetSlim(SessionOptions? sessionOptions = null)
+    {
+        var modelPath = Path.Combine(GetExeDir(), "resources", "onnx", "depth_googlenet_slim.onnx");
+        return File.ReadAllBytes(modelPath);
+    }
 }

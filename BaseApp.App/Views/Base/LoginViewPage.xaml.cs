@@ -131,8 +131,9 @@ namespace BaseApp.App.Views
                     {
                         if (CVUtil.FaceDetect(frame))
                         {
-                            CVUtil.AntiSpoofingDemo(frame);
-                            LoginViewModel.LoginByFaceRecognition(frame);
+                            if (CVUtil.FaceDepthDetect(frame)) {
+                                LoginViewModel.LoginByFaceRecognition(frame);
+                            }
                         }
                         Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 4, frame.Height / 4));
 

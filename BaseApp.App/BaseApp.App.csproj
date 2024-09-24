@@ -47,19 +47,13 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.19.2" />
     <PackageReference Include="OpenCvSharp4" Version="4.10.0.20240616" />
+    <PackageReference Include="OpenCvSharp4.Extensions" Version="4.10.0.20240616" />
+    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.10.0.20240616" />
     <PackageReference Include="OpenCvSharp4.Windows" Version="4.10.0.20240616" />
     <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.10.0.20240616" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.4" />
-    <PackageReference Include="ViewFaceCore" Version="0.3.8" />
-    <PackageReference Include="ViewFaceCore.all_models" Version="6.0.7" />
-    <PackageReference Include="ViewFaceCore.Extension.SkiaSharp" Version="0.3.7" />
-    <PackageReference Include="ViewFaceCore.model.face_detector" Version="6.0.7" />
-    <PackageReference Include="ViewFaceCore.model.face_recognizer" Version="6.0.7" />
-    <PackageReference Include="ViewFaceCore.model.face_recognizer_light" Version="6.0.7" />
-    <PackageReference Include="ViewFaceCore.model.fas_first" Version="6.0.7" />
-    <PackageReference Include="ViewFaceCore.model.fas_second" Version="6.0.7" />
-    <PackageReference Include="ViewFaceCore.runtime.win.x64" Version="6.0.7" />
+    <PackageReference Include="UMapx" Version="6.1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -83,11 +77,20 @@
     <None Update="resources\onnx\arcfaceresnet100-11-int8.onnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="resources\onnx\depth_googlenet_slim.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="resources\onnx\open_closed_eye.onnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="resources\onnx\scrfd_2.5g_kps.onnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="resources\onnx\v1se.onnx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="resources\onnx\v2.onnx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

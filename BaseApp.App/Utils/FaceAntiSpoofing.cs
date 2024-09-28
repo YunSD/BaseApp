@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Drawing;
 using OpenCvSharp.Extensions;
+using System;
 
 
 namespace BaseApp.App.Utils
@@ -29,10 +30,7 @@ namespace BaseApp.App.Utils
             Mat roi = new Mat();
             Cv2.Resize(new Mat(frame, rect), roi, new OpenCvSharp.Size(80, 80));
 
-            float[] blobData = PreprocessImage(roi, 80, 80);
-
-            // 创建 Tensor
-            var inputData = new DenseTensor<float>(blobData, new[] { 1, 3, roi.Height, roi.Width });
+            var inputData = ToTensor(roi.ToBitmap());
 
             // 准备ONNX模型的输入
             var inputMeta = _session.InputMetadata;
@@ -44,11 +42,35 @@ namespace BaseApp.App.Utils
 
             var firstOut = outputs.First();
             var tens = firstOut.Value as DenseTensor<float> ?? firstOut.AsTensor<float>().ToDenseTensor();
-            var data = tens.ToArray();
-            Softmax(data);
+            Softmax(tens.ToArray());
             var span = tens.Buffer.Span;
             return 1f;
 
+        }
+
+        public static Tensor<float> ToTensor(Bitmap image)
+        {
+            // 将 Bitmap 转换为浮点张量
+            var width = image.Width;
+            var height = image.Height;
+            var channels = 3; // 假设为 RGB
+
+            // 创建一个新的张量用于图像
+            var tensor = new DenseTensor<float>(new[] { 1, channels, height, width });
+
+            // 遍历图像像素并填充张量
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    Color pixel = image.GetPixel(x, y);
+                    tensor[0, 0, y, x] = pixel.R / 255f; // 红色通道
+                    tensor[0, 1, y, x] = pixel.G / 255f; // 绿色通道
+                    tensor[0, 2, y, x] = pixel.B / 255f; // 蓝色通道
+                }
+            }
+
+            return tensor;
         }
 
 

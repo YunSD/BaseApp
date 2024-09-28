@@ -41,7 +41,7 @@ public static class FaceAiSharpBundleFactory
 
     public static FaceAntiSpoofing CreateFaceAntiSpoofingDetector(SessionOptions? sessionOptions = null)
     {
-        var modelPath = Path.Combine(GetExeDir(), "resources", "onnx", "v1se.onnx");
+        var modelPath = Path.Combine(GetExeDir(), "resources", "onnx", "v2.onnx");
         return new FaceAntiSpoofing(modelPath);
     }
 

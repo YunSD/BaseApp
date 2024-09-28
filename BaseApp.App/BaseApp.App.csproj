@@ -74,6 +74,9 @@
     <None Update="resources\models\haarcascade_frontalface_default.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="resources\onnx\2.7_80x80_MiniFASNetV2.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="resources\onnx\arcfaceresnet100-11-int8.onnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

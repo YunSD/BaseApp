@@ -125,8 +125,9 @@ namespace BaseApp.App.Views
             try
             {
                 await Task.Delay(50);
-                using (OpenCvSharp.Mat frame = CameraService.Read())
+                using (OpenCvSharp.Mat frame1 = CameraService.Read())
                 {
+                    OpenCvSharp.Mat frame = new OpenCvSharp.Mat("C:\\Users\\zzz\\Downloads\\T1.jpg");
                     if (!frame.Empty())
                     {
                         if (CVUtil.FaceDetect(frame))

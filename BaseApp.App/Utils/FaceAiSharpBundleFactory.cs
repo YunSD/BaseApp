@@ -41,8 +41,9 @@ public static class FaceAiSharpBundleFactory
 
     public static FaceAntiSpoofing CreateFaceAntiSpoofingDetector(SessionOptions? sessionOptions = null)
     {
-        var modelPath = Path.Combine(GetExeDir(), "resources", "onnx", "v2.onnx");
-        return new FaceAntiSpoofing(modelPath);
+        var modelPath_27 = Path.Combine(GetExeDir(), "resources", "onnx", "2.7_80x80_MiniFASNetV2.onnx");
+        var modelPath_400 = Path.Combine(GetExeDir(), "resources", "onnx", "4_0_0_80x80_MiniFASNetV1SE.onnx");
+        return new FaceAntiSpoofing(modelPath_27, modelPath_400);
     }
 
     private static IMemoryCache CreateMemoryCache()

@@ -34,12 +34,15 @@
         /// <param name="frame">The frame<see cref="OpenCvSharp.Mat"/></param>
         /// <param name="personRect">The personRect<see cref="Rect"/></param>
         /// <returns>The <see cref="float"/></returns>
-        public float DetectorConfidence(OpenCvSharp.Mat frame, Rect personRect)
+        public bool DetectorConfidence(OpenCvSharp.Mat frame, Rect personRect)
         {
+            // 最大容忍
+            if (personRect.Width * 2 > frame.Width || personRect.Height * 2 > frame.Height) return false;
             // pre
-
             Rect first_rect_27 = CalculateBox(personRect, frame.Cols, frame.Rows, 2.7f);
             Rect second_rect_40 = CalculateBox(personRect, frame.Cols, frame.Rows, 4.0f);
+
+            Mat mm = new Mat(frame, first_rect_27);
 
             Mat first_frame_27 = Crop(frame, first_rect_27, 2.7f, 80, 80);
             Mat second_frame_40 = Crop(frame, second_rect_40, 4.0f, 80, 80);
@@ -60,15 +63,11 @@
             DenseTensor<float> first_result = first_out.First().Value as DenseTensor<float> ?? first_out.First().AsTensor<float>().ToDenseTensor();
             DenseTensor<float> second_result = second_out.First().Value as DenseTensor<float> ?? second_out.First().AsTensor<float>().ToDenseTensor();
 
+            var result = MergeTensors(first_result, second_result);
 
-            Softmax(tens.ToArray());
-            var span = tens.Buffer.Span;
-            return 1f;
-        }
-
-
-        public static bool predication() { 
-        
+            (int a, float b) = Softmax(result.ToArray());
+            if (a == 1) return true;
+            return false;
         }
 
         /// <summary>
@@ -106,7 +105,7 @@
         /// </summary>
         /// <param name="prob">The prob<see cref="float[]"/></param>
         /// <returns>The <see cref="bool"/></returns>
-        public bool Softmax(float[] prob)
+        public (int, float) Softmax(float[] prob)
         {
             float total = 0;
             float max = prob[0];
@@ -132,11 +131,9 @@
             }
 
             // 找到最大概率的类别
-            int maxPos = Array.IndexOf(prob, prob.Max());
-            int _class = maxPos;
-            float _prob = result[maxPos];
-
-            return 0;
+            int _maxPos = Array.IndexOf(prob, prob.Max());
+            float _prob = result[_maxPos];
+            return (_maxPos, _prob);
         }
 
 
@@ -227,7 +224,7 @@
             }
 
             // 裁剪图像
-            Mat croppedImg = new Mat(orgImg, new Rect(leftTopX, leftTopY, rightBottomX - leftTopX + 1, rightBottomY - leftTopY + 1))
+            Mat croppedImg = new Mat(orgImg, new Rect(leftTopX, leftTopY, rightBottomX - leftTopX + 1, rightBottomY - leftTopY + 1));
             // 调整大小
             Mat dstImg = new Mat();
             Cv2.Resize(croppedImg, dstImg, new OpenCvSharp.Size(outW, outH));
@@ -285,6 +282,35 @@
             }
 
             return (leftTopX, leftTopY, rightBottomX, rightBottomY);
+        }
+
+
+        public static DenseTensor<float> MergeTensors(DenseTensor<float> tensorA, DenseTensor<float> tensorB)
+        {
+            // 检查两个张量的维度是否一致
+            if (tensorA.Dimensions.Length != tensorB.Dimensions.Length)
+            {
+                throw new ArgumentException("两个张量的维度不一致");
+            }
+
+            for (int i = 0; i < tensorA.Dimensions.Length; i++)
+            {
+                if (tensorA.Dimensions[i] != tensorB.Dimensions[i])
+                {
+                    throw new ArgumentException("两个张量的形状不一致");
+                }
+            }
+
+            // 创建一个新张量来存储结果
+            DenseTensor<float> result = new DenseTensor<float>(tensorA.Dimensions);
+
+            // 逐元素相加并求平均
+            for (int i = 0; i < tensorA.Length; i++)
+            {
+                result.SetValue(i, (tensorA.GetValue(i) + tensorB.GetValue(i))/2);
+            }
+
+            return result;
         }
     }
 }

@@ -25,9 +25,10 @@ namespace BaseApp.App.Utils
             Rect[] rects = cascadeClassifier.DetectMultiScale(frame, 1.05, 20, OpenCvSharp.HaarDetectionTypes.ScaleImage, new OpenCvSharp.Size(150, 150));
             if (rects.Length == 1)
             {
-                FaceAntiSpoofing.DetectorConfidence(frame, rects[0]);
-                //DrawFocusRectangle(mat, ExpandRect(rects[0], 30), 50, OpenCvSharp.Scalar.Green, 8);
-                return true;
+                if (FaceAntiSpoofing.DetectorConfidence(frame, rects[0])) {
+                    DrawFocusRectangle(frame, ExpandRect(rects[0], 30), 50, OpenCvSharp.Scalar.Green, 8);
+                    return true;
+                }
             }
             return false;
         }

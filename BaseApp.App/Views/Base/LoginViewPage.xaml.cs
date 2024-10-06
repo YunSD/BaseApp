@@ -117,7 +117,7 @@ namespace BaseApp.App.Views
         }
 
 
-        private SemaphoreSlim IsProcess = new SemaphoreSlim(1, 1);
+        private static SemaphoreSlim IsProcess = new SemaphoreSlim(1, 1);
         private void CompositionTarget_Rendering(object? sender, EventArgs e)
         {
             if (!IsProcess.Wait(0)) return;
@@ -125,16 +125,13 @@ namespace BaseApp.App.Views
             try
             {
                 await Task.Delay(50);
-                using (OpenCvSharp.Mat frame1 = CameraService.Read())
+                using (OpenCvSharp.Mat frame = CameraService.Read())
                 {
-                    OpenCvSharp.Mat frame = new OpenCvSharp.Mat("C:\\Users\\zzz\\Downloads\\T1.jpg");
                     if (!frame.Empty())
                     {
                         if (CVUtil.FaceDetect(frame))
                         {
-                            if (CVUtil.FaceDepthDetect(frame)) {
-                                LoginViewModel.LoginByFaceRecognition(frame);
-                            }
+                            LoginViewModel.LoginByFaceRecognition(frame);
                         }
                         Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 4, frame.Height / 4));
 
@@ -145,6 +142,8 @@ namespace BaseApp.App.Views
                         });
                         }
                     }
+                }catch(Exception e) { 
+                    logger.Error(e);
                 }
                 finally
                 {
@@ -157,6 +156,7 @@ namespace BaseApp.App.Views
         private void UnloadCameraReader()
         {
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
+            CameraService.Read();
         }
 
         public void Receive(LoginCompletedMessage message)

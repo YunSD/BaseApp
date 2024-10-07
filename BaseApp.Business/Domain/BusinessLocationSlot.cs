@@ -1,5 +1,4 @@
 ﻿using BaseApp.Core.Db;
-using BaseApp.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,23 +9,27 @@ using System.Threading.Tasks;
 
 namespace BaseApp.Business.Domain
 {
-    [Table("business_location")]
-    public class BusinessLocation : BaseEntity
+    [Table("business_location_slot")]
+    public class BusinessLocationSlot : BaseEntity
     {
         [Key]
+        [Column("slot_id")]
+        public long? SlotId { get; set; }
+
+        [Column("box_id")]
+        public long? BoxId { get; set; }
+
         [Column("location_id")]
         public long? LocationId { get; set; }
-
-        public long? BoxId { get; set; }
 
         public string? Name { get; set; }
 
         public string? Code { get; set; }
 
-        [Column("light_address")]
-        public string? LightAddress { get; set; }
+        [Column("slot_address")]
+        public string? SlotAddress { get; set; }
 
         [Column("lock_address")]
-        public string? LockAddress { get; set;}
+        public string? LockAddress { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BaseApp.Core.Domain;
+﻿using BaseApp.Core.Db;
+using BaseApp.Core.Domain;
 using BaseApp.Core.Extensions;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Core.UnitOfWork.Collections;
@@ -24,7 +25,7 @@ namespace BaseApp.Upms.Upms
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<SysRole> repository;
 
-        public RoleViewModel(IUnitOfWork unitOfWork)
+        public RoleViewModel(IUnitOfWork<BaseDbContext> unitOfWork)
         {
             _unitOfWork = unitOfWork;
             repository = _unitOfWork.GetRepository<SysRole>();

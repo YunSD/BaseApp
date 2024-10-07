@@ -1,4 +1,5 @@
-﻿using BaseApp.Core.Domain;
+﻿using BaseApp.Core.Db;
+using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Core.Utils;
@@ -16,7 +17,7 @@ namespace BaseApp.Upms.ViewModels
         private readonly IRepository<SysMenu> repository;
 
 
-        public FolderViewModel(IUnitOfWork unitOfWork)
+        public FolderViewModel(IUnitOfWork<BaseDbContext> unitOfWork)
         {
             _unitOfWork = unitOfWork;
             repository = _unitOfWork.GetRepository<SysMenu>();

@@ -1,4 +1,5 @@
-﻿using BaseApp.Core.Domain;
+﻿using BaseApp.Core.Db;
+using BaseApp.Core.Domain;
 using BaseApp.Core.Extensions;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Core.Utils;
@@ -20,7 +21,7 @@ namespace BaseApp.Upms.ViewModels
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<SysMenu> repository;
 
-        public MenuViewModel(IUnitOfWork unitOfWork)
+        public MenuViewModel(IUnitOfWork<BaseDbContext> unitOfWork)
         {
             _unitOfWork = unitOfWork;
             repository = _unitOfWork.GetRepository<SysMenu>();

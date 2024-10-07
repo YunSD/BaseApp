@@ -1,5 +1,6 @@
 ﻿using BaseApp.App.Services;
 using BaseApp.App.Views;
+using BaseApp.Core.Db;
 using BaseApp.Core.Domain;
 using BaseApp.Core.Enums;
 using BaseApp.Core.Security.Messages;
@@ -37,7 +38,7 @@ namespace BaseApp.App.ViewModels
         [ObservableProperty]
         public LoginType loginType = LoginType.PASSWORD;
 
-        public LoginViewModel(IUnitOfWork unitOfWork, BaseUserDetailsService userDetailsService)
+        public LoginViewModel(IUnitOfWork<BaseDbContext> unitOfWork, BaseUserDetailsService userDetailsService)
         {
             this._unitOfWork = unitOfWork;
             this.userDetailsService = userDetailsService;

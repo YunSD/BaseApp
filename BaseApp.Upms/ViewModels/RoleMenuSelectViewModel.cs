@@ -1,4 +1,5 @@
-﻿using BaseApp.Core.Domain;
+﻿using BaseApp.Core.Db;
+using BaseApp.Core.Domain;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Core.Utils;
 using BaseApp.Upms.ViewModels.VO;

@@ -1,4 +1,5 @@
-﻿using BaseApp.Core.Domain;
+﻿using BaseApp.Core.Db;
+using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.UnitOfWork;
 
@@ -9,7 +10,7 @@ namespace BaseApp.Upms.Services
 
         private IUnitOfWork _unitOfWork;
 
-        public BaseUserDetailsService(IUnitOfWork unitOfWork)
+        public BaseUserDetailsService(IUnitOfWork<BaseDbContext> unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }

@@ -1,4 +1,5 @@
 ﻿using BaseApp.App.Services;
+using BaseApp.Core.Db;
 using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.UnitOfWork;
@@ -13,7 +14,7 @@ namespace BaseApp.App.ViewModels.Base
         private ILog logger = LogManager.GetLogger(nameof(PersonFaceRegistrationViewModel));
         private readonly IUnitOfWork _unitOfWork;
 
-        public PersonFaceRegistrationViewModel(IUnitOfWork unitOfWork)
+        public PersonFaceRegistrationViewModel(IUnitOfWork<BaseDbContext> unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }

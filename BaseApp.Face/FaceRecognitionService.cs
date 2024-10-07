@@ -1,4 +1,5 @@
-﻿using BaseApp.Core.Domain;
+﻿using BaseApp.Core.Db;
+using BaseApp.Core.Domain;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Core.Utils;
 using FaceAiSharp;
@@ -53,7 +54,7 @@ namespace BaseApp.App.Services
 
         public static void LoadData()
         {
-            IUnitOfWork unitOfWork = ServiceProviderUtil.GetRequiredService<IUnitOfWork>();
+            IUnitOfWork unitOfWork = ServiceProviderUtil.GetRequiredService<IUnitOfWork<BaseDbContext>>();
             IRepository<SysUser> repository = unitOfWork.GetRepository<SysUser>();
             List<SysUser> all_user = repository.GetAll().ToList();
             if (all_user.Count == 0) return;

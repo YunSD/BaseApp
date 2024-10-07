@@ -1,4 +1,5 @@
-﻿using BaseApp.Core.Domain;
+﻿using BaseApp.Core.Db;
+using BaseApp.Core.Domain;
 using BaseApp.Core.Extensions;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Core.UnitOfWork.Collections;
@@ -25,7 +26,7 @@ namespace BaseApp.Upms.ViewModels
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<SysUser> sys_db;
 
-        public UserViewModel(IUnitOfWork unitOfWork)
+        public UserViewModel(IUnitOfWork<BaseDbContext> unitOfWork)
         {
             _unitOfWork = unitOfWork;
             sys_db = _unitOfWork.GetRepository<SysUser>();

@@ -1,12 +1,9 @@
 ﻿namespace BaseApp.App.Utils
 {
-    using HandyControl.Tools.Extension;
     using Microsoft.ML.OnnxRuntime;
     using Microsoft.ML.OnnxRuntime.Tensors;
     using OpenCvSharp;
     using System;
-    using System.Drawing;
-    using System.Drawing.Imaging;
 
     /// <summary>
     /// Defines the <see cref="FaceAntiSpoofing" />

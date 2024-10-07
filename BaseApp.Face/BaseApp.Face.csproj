@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\Yun\.nuget\packages\faceaisharp.models.arcface.lresnet100e-ir-int8\0.20230419.1\contentFiles\any\any\onnx\arcfaceresnet100-11-int8.onnx" />
+    <Content Remove="C:\Users\Yun\.nuget\packages\faceaisharp.models.openvino.open-closed-eye-0001\0.20220116.2\contentFiles\any\any\onnx\open_closed_eye.onnx" />
+    <Content Remove="C:\Users\Yun\.nuget\packages\faceaisharp.models.scrfd.2dot5g_kps\0.20230205.2\contentFiles\any\any\onnx\scrfd_2.5g_kps.onnx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FaceAiSharp.Bundle" Version="0.5.23" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.19.2" />
+    <PackageReference Include="OpenCvSharp4" Version="4.10.0.20240616" />
+    <PackageReference Include="OpenCvSharp4.Extensions" Version="4.10.0.20240616" />
+    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.10.0.20240616" />
+    <PackageReference Include="OpenCvSharp4.Windows" Version="4.10.0.20240616" />
+    <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.10.0.20240616" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BaseApp.Core\BaseApp.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="models\2.7_80x80_MiniFASNetV2.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="models\4_0_0_80x80_MiniFASNetV1SE.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="models\arcfaceresnet100-11-int8.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="models\depth_googlenet_slim.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="models\haarcascade_frontalface_default.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="models\open_closed_eye.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="models\scrfd_2.5g_kps.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

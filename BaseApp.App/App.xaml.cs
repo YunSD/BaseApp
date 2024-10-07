@@ -1,5 +1,6 @@
 ﻿using BaseApp.App.Views;
 using BaseApp.App.Windows;
+using BaseApp.Business.Db;
 using BaseApp.Core.Db;
 using BaseApp.Core.Extensions;
 using BaseApp.Resource.Services;
@@ -52,7 +53,16 @@ namespace MaterialDemo
                     .EnableSensitiveDataLogging()
                     .AddInterceptors(new BaseMetaDateInterceptor())
                     .LogTo(Console.WriteLine, LogLevel.Debug));
-                services.AddUnitOfWork<BaseDbContext>();
+
+                services.AddDbContextPool<BusinessDbContext>((options) => options
+                    .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), mySqlOptions => { mySqlOptions.CommandTimeout(1); })
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTrackingWithIdentityResolution)
+                    .EnableDetailedErrors()
+                    .EnableSensitiveDataLogging()
+                    .AddInterceptors(new BaseMetaDateInterceptor())
+                    .LogTo(Console.WriteLine, LogLevel.Debug));
+
+                services.AddUnitOfWork<BaseDbContext, BusinessDbContext>();
 
                 // Main window with navigation
                 services.AddSingleton<MainWindow>();

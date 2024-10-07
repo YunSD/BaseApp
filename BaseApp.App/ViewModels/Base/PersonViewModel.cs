@@ -1,5 +1,6 @@
 ﻿using BaseApp.App.ViewModels.Base;
 using BaseApp.App.Views;
+using BaseApp.Core.Db;
 using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.Security.Messages;
@@ -26,7 +27,7 @@ namespace BaseApp.App.ViewModels
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<SysUser> repository;
 
-        public PersonViewModel(IUnitOfWork unitOfWork, BaseUserDetailsService baseUserDetailsService)
+        public PersonViewModel(IUnitOfWork<BaseDbContext> unitOfWork, BaseUserDetailsService baseUserDetailsService)
         {
             this._unitOfWork = unitOfWork;
             this.baseUserDetailsService = baseUserDetailsService;

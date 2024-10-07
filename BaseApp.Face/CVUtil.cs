@@ -14,10 +14,9 @@ namespace BaseApp.App.Utils
 {
     public class CVUtil
     {
-        private static readonly string ModelDirectory = "Resources\\models";
 
         private static readonly OpenCvSharp.CascadeClassifier cascadeClassifier = new OpenCvSharp
-            .CascadeClassifier(Path.Combine(ModelDirectory, "haarcascade_frontalface_default.xml"));
+            .CascadeClassifier(Path.Combine("models", "haarcascade_frontalface_default.xml"));
 
         private static FaceAntiSpoofing FaceAntiSpoofing = FaceAiSharpBundleFactory.CreateFaceAntiSpoofingDetector();
         public static bool FaceDetect(OpenCvSharp.Mat frame)
@@ -81,10 +80,5 @@ namespace BaseApp.App.Utils
             Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + rect.Width - cornerLength, rect.Y + rect.Height), color, thickness, lineType: LineTypes.AntiAlias); // 水平线
             Cv2.Line(mat, new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height), new OpenCvSharp.Point(rect.X + rect.Width, rect.Y + rect.Height - cornerLength), color, thickness, lineType: LineTypes.AntiAlias); // 垂直线
         }
-
-
-
-        
-
     }
 }

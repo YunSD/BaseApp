@@ -1,12 +1,12 @@
-﻿using BaseApp.App.Windows;
-using BaseApp.Core.Security.Messages;
+﻿using BaseApp.Core.Security.Messages;
 using BaseApp.Core.Utils;
+using BaseApp.ViewModels;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui;
 
-namespace BaseApp.App.Views
+namespace BaseApp.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -20,11 +20,8 @@ namespace BaseApp.App.Views
         public MainWindow(MainWindowViewModel viewModel, LoginViewPage loginViewPage)
         {
             this.ViewModel = viewModel;
-
             this.DataContext = this;
-
             InitializeComponent();
-
             this.Navigate(loginViewPage);
 
             // default
@@ -66,8 +63,8 @@ namespace BaseApp.App.Views
 
         public void Receive(LoginCompletedRedirectionMessage message)
         {
-            Dispatcher.Invoke(()=> this.Navigate(ServiceProviderUtil.GetRequiredService<HomeViewPage>()));
-            
+            Dispatcher.Invoke(() => this.Navigate(ServiceProviderUtil.GetRequiredService<HomeViewPage>()));
+
         }
 
         public void Receive(LogoutMessage message)

@@ -1,10 +1,9 @@
-﻿namespace BaseApp.App.Utils
-{
-    using Microsoft.ML.OnnxRuntime;
-    using Microsoft.ML.OnnxRuntime.Tensors;
-    using OpenCvSharp;
-    using System;
+﻿using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
+using OpenCvSharp;
 
+namespace BaseApp.Face.Utils
+{
     /// <summary>
     /// Defines the <see cref="FaceAntiSpoofing" />
     /// </summary>
@@ -304,7 +303,7 @@
             // 逐元素相加并求平均
             for (int i = 0; i < tensorA.Length; i++)
             {
-                result.SetValue(i, (tensorA.GetValue(i) + tensorB.GetValue(i))/2);
+                result.SetValue(i, (tensorA.GetValue(i) + tensorB.GetValue(i)) / 2);
             }
 
             return result;

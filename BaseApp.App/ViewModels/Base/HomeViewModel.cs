@@ -1,8 +1,9 @@
-﻿using BaseApp.App.Views;
-using BaseApp.Core.Domain;
+﻿using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.Utils;
+using BaseApp.Utils;
+using BaseApp.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -10,7 +11,7 @@ using System.Collections.ObjectModel;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 
-namespace BaseApp.App.ViewModels
+namespace BaseApp.ViewModels
 {
     public partial class HomeViewModel : ObservableRecipient, IRecipient<RefreshUserMessage>
     {

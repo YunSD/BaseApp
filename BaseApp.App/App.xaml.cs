@@ -1,12 +1,12 @@
-﻿using BaseApp.App.Views;
-using BaseApp.App.Windows;
-using BaseApp.Business.Db;
+﻿using BaseApp.Business.Db;
 using BaseApp.Core.Db;
 using BaseApp.Core.Extensions;
 using BaseApp.Resource.Services;
+using BaseApp.Services;
 using BaseApp.Upms.Services;
+using BaseApp.ViewModels;
+using BaseApp.Views;
 using log4net;
-using MaterialDemo.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -17,7 +17,7 @@ using System.Windows.Threading;
 using Wpf.Ui;
 
 
-namespace MaterialDemo
+namespace BaseApp
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -73,8 +73,10 @@ namespace MaterialDemo
 
                 services.AddTransientFromNamespace("BaseApp.Upms.ViewModels", Assembly.Load("BaseApp.Upms"));
                 services.AddTransientFromNamespace("BaseApp.Upms.Views", Assembly.Load("BaseApp.Upms"));
-                services.AddTransientFromNamespace("BaseApp.App.ViewModels", Assembly.GetExecutingAssembly());
-                services.AddTransientFromNamespace("BaseApp.App.Views", Assembly.GetExecutingAssembly());
+                services.AddTransientFromNamespace("BaseApp.Business.ViewModels", Assembly.Load("BaseApp.Business"));
+                services.AddTransientFromNamespace("BaseApp.Business.Views", Assembly.Load("BaseApp.Business"));
+                services.AddTransientFromNamespace("BaseApp.ViewModels", Assembly.GetExecutingAssembly());
+                services.AddTransientFromNamespace("BaseApp.Views", Assembly.GetExecutingAssembly());
             }).Build();
 
 

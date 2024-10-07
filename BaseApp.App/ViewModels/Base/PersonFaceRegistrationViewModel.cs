@@ -1,13 +1,13 @@
-﻿using BaseApp.App.Services;
-using BaseApp.Core.Db;
+﻿using BaseApp.Core.Db;
 using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.UnitOfWork;
+using BaseApp.Face.Services;
 using BaseApp.Security;
 using log4net;
 using System.Text.Json;
 
-namespace BaseApp.App.ViewModels.Base
+namespace BaseApp.ViewModels
 {
     public class PersonFaceRegistrationViewModel
     {

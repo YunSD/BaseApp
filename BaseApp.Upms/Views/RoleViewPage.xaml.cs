@@ -1,4 +1,4 @@
-﻿using BaseApp.Upms.Upms;
+﻿using BaseApp.Upms.ViewModels;
 using Wpf.Ui.Controls;
 
 namespace BaseApp.Upms.Views

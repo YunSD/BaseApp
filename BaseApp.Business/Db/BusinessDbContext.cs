@@ -1,6 +1,4 @@
 ﻿using BaseApp.Business.Domain;
-using BaseApp.Core.Domain;
-using BaseApp.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseApp.Business.Db

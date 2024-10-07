@@ -1,12 +1,6 @@
 ﻿using BaseApp.Core.Db;
-using BaseApp.Core.Enums;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaseApp.Business.Domain
 {
@@ -17,6 +11,7 @@ namespace BaseApp.Business.Domain
         [Column("location_id")]
         public long? LocationId { get; set; }
 
+        [Column("box_id")]
         public long? BoxId { get; set; }
 
         public string? Name { get; set; }
@@ -27,6 +22,6 @@ namespace BaseApp.Business.Domain
         public string? LightAddress { get; set; }
 
         [Column("lock_address")]
-        public string? LockAddress { get; set;}
+        public string? LockAddress { get; set; }
     }
 }

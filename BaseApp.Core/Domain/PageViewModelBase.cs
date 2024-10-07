@@ -50,5 +50,6 @@ namespace BaseApp.Core.Domain
             this.TotalPage = pagedList.TotalPages;
         }
 
+
     }
 }

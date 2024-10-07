@@ -1,23 +1,17 @@
-﻿using BaseApp.App.Services;
-using BaseApp.App.Views;
-using BaseApp.Core.Db;
+﻿using BaseApp.Core.Db;
 using BaseApp.Core.Domain;
 using BaseApp.Core.Enums;
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Core.Utils;
-using BaseApp.Security;
+using BaseApp.Face.Services;
 using BaseApp.Upms.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using log4net;
-using log4net.Repository.Hierarchy;
-using System.Runtime.InteropServices;
-using System.Windows.Controls;
-using System.Windows.Threading;
 
-namespace BaseApp.App.ViewModels
+namespace BaseApp.ViewModels
 {
 
     /// <summary>

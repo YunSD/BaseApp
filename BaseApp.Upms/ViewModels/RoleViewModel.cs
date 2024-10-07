@@ -5,7 +5,6 @@ using BaseApp.Core.UnitOfWork;
 using BaseApp.Core.UnitOfWork.Collections;
 using BaseApp.Core.Utils;
 using BaseApp.Resource.Controls;
-using BaseApp.Upms.ViewModels;
 using BaseApp.Upms.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -15,7 +14,7 @@ using MaterialDesignThemes.Wpf;
 using System.Linq.Expressions;
 using Wpf.Ui.Controls;
 
-namespace BaseApp.Upms.Upms
+namespace BaseApp.Upms.ViewModels
 {
     public partial class RoleViewModel : PageViewModelBase<SysRole>, INavigationAware
     {

@@ -2,15 +2,11 @@
 using FaceONNX;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
-using OpenCvSharp.WpfExtensions;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Threading.Channels;
-using System.Windows.Media.Media3D;
 using UMapx.Core;
 
-namespace BaseApp.App.Utils
+namespace BaseApp.Face.Utils
 {
     public class CVUtil
     {
@@ -24,7 +20,8 @@ namespace BaseApp.App.Utils
             Rect[] rects = cascadeClassifier.DetectMultiScale(frame, 1.05, 20, OpenCvSharp.HaarDetectionTypes.ScaleImage, new OpenCvSharp.Size(150, 150));
             if (rects.Length == 1)
             {
-                if (FaceAntiSpoofing.DetectorConfidence(frame, rects[0])) {
+                if (FaceAntiSpoofing.DetectorConfidence(frame, rects[0]))
+                {
                     DrawFocusRectangle(frame, ExpandRect(rects[0], 30), 50, OpenCvSharp.Scalar.Green, 8);
                     return true;
                 }
@@ -33,7 +30,8 @@ namespace BaseApp.App.Utils
         }
 
 
-        public static bool FaceDepthDetect(OpenCvSharp.Mat mat) {
+        public static bool FaceDepthDetect(OpenCvSharp.Mat mat)
+        {
             try
             {
                 var labels = FaceDepthClassifier.Labels;
@@ -44,10 +42,11 @@ namespace BaseApp.App.Utils
                 string re = labels[gender];
                 return gender == 1;
             }
-            catch (Exception ex) { 
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
             }
-           return false;
+            return false;
         }
 
 

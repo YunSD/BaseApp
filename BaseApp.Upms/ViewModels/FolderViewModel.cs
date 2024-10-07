@@ -2,8 +2,8 @@
 using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.UnitOfWork;
-using BaseApp.Core.Utils;
 using BaseApp.Resource.Controls;
+using BaseApp.Utils;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using Wpf.Ui.Controls;

@@ -3,7 +3,7 @@
     public class BaseFileUtil
     {
         private static readonly string BaseFilePath = AppDomain.CurrentDomain.BaseDirectory
-            + "Cache" + Path.DirectorySeparatorChar.ToString();
+            + "cache" + Path.DirectorySeparatorChar.ToString();
 
         private static readonly SnowflakeIdWorker IdWorker = SnowflakeIdWorker.Singleton;
 

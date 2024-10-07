@@ -1,12 +1,11 @@
-﻿using BaseApp.App.ViewModels;
-using BaseApp.App.Windows;
-using BaseApp.Upms.Views;
+﻿using BaseApp.Upms.Views;
+using BaseApp.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 
-namespace BaseApp.App.Views
+namespace BaseApp.Views
 {
     /// <summary>
     /// HomeView.xaml 的交互逻辑

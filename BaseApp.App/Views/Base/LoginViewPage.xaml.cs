@@ -1,17 +1,16 @@
-﻿using BaseApp.App.Services;
-using BaseApp.App.Utils;
-using BaseApp.App.ViewModels;
-using BaseApp.App.Windows;
+﻿
 using BaseApp.Core.Enums;
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.Utils;
+using BaseApp.Face.Utils;
 using BaseApp.Resource.Controls;
+using BaseApp.Services;
+using BaseApp.ViewModels;
 using CommunityToolkit.Mvvm.Messaging;
 using log4net;
 using MaterialDesignThemes.Wpf;
 using OpenCvSharp;
 using OpenCvSharp.WpfExtensions;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,7 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Wpf.Ui;
 
-namespace BaseApp.App.Views
+namespace BaseApp.Views
 {
     /// <summary>
     /// LoginView.xaml 的交互逻辑
@@ -121,28 +120,31 @@ namespace BaseApp.App.Views
         private void CompositionTarget_Rendering(object? sender, EventArgs e)
         {
             if (!IsProcess.Wait(0)) return;
-            Task.Run(async () => {
-            try
+            Task.Run(async () =>
             {
-                await Task.Delay(50);
-                using (OpenCvSharp.Mat frame = CameraService.Read())
+                try
                 {
-                    if (!frame.Empty())
+                    await Task.Delay(50);
+                    using (OpenCvSharp.Mat frame = CameraService.Read())
                     {
-                        if (CVUtil.FaceDetect(frame))
+                        if (!frame.Empty())
                         {
-                            LoginViewModel.LoginByFaceRecognition(frame);
-                        }
-                        Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 4, frame.Height / 4));
+                            if (CVUtil.FaceDetect(frame))
+                            {
+                                LoginViewModel.LoginByFaceRecognition(frame);
+                            }
+                            Cv2.Resize(frame, frame, new OpenCvSharp.Size(frame.Width / 4, frame.Height / 4));
 
-                        Dispatcher.Invoke(() =>
-                        {
-                            BitmapSource bitmapSource = frame.ToBitmapSource();
-                            FaceImage.Source = bitmapSource;
-                        });
+                            Dispatcher.Invoke(() =>
+                            {
+                                BitmapSource bitmapSource = frame.ToBitmapSource();
+                                FaceImage.Source = bitmapSource;
+                            });
                         }
                     }
-                }catch(Exception e) { 
+                }
+                catch (Exception e)
+                {
                     logger.Error(e);
                 }
                 finally
@@ -150,7 +152,7 @@ namespace BaseApp.App.Views
                     IsProcess.Release();
                 }
             });
-            
+
         }
 
         private void UnloadCameraReader()

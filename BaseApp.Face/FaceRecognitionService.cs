@@ -7,7 +7,7 @@ using HNSW.Net;
 using SixLabors.ImageSharp.PixelFormats;
 using System.Text.Json;
 
-namespace BaseApp.App.Services
+namespace BaseApp.Face.Services
 {
     public class FaceRecognitionService
     {

@@ -15,5 +15,12 @@ namespace BaseApp.Business.Domain
 
         public string? Code { get; set; }
 
+        [Column("light_control_address")]
+        public string? LightControlAddress { get; set; }
+
+        [Column("lock_control_address")]
+        public string? LockControlAddress { get; set; }
+
+
     }
 }

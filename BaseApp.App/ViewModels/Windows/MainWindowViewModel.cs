@@ -5,7 +5,7 @@
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace BaseApp.App.Windows
+namespace BaseApp.ViewModels
 {
     public partial class MainWindowViewModel : ObservableObject
     {

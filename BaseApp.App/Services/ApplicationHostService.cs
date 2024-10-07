@@ -3,14 +3,14 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using BaseApp.App.Services;
-using BaseApp.App.Views;
 using BaseApp.Core.Utils;
+using BaseApp.Face.Services;
+using BaseApp.Views;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
 
 
-namespace MaterialDemo.Services
+namespace BaseApp.Services
 {
     /// <summary>
     /// Managed host of the application.

@@ -1,9 +1,10 @@
-﻿using BaseApp.App.ViewModels;
-using BaseApp.Core.Utils;
+﻿using BaseApp.Core.Utils;
+using BaseApp.Utils;
+using BaseApp.ViewModels;
 using System.Windows;
 using Wpf.Ui.Controls;
 
-namespace BaseApp.App.Views
+namespace BaseApp.Views
 {
     public partial class PersonViewPage : INavigableView<PersonViewModel>
     {

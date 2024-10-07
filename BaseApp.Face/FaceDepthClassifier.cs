@@ -1,11 +1,7 @@
 ﻿using FaceAiSharp;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Resources;
 using UMapx.Core;
 using UMapx.Imaging;
 

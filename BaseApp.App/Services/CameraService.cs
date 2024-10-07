@@ -1,6 +1,6 @@
 ﻿using OpenCvSharp;
 
-namespace BaseApp.App.Services
+namespace BaseApp.Services
 {
     public class CameraService
     {

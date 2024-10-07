@@ -1,18 +1,19 @@
-﻿namespace BaseApp.App.Views
-{
-    using BaseApp.App.Services;
-    using BaseApp.App.Utils;
-    using BaseApp.App.ViewModels.Base;
-    using BaseApp.Core.Utils;
-    using BaseApp.Resource.Controls;
-    using log4net;
-    using MaterialDesignThemes.Wpf;
-    using OpenCvSharp;
-    using OpenCvSharp.WpfExtensions;
-    using System.Windows.Controls;
-    using System.Windows.Media;
-    using Wpf.Ui;
+﻿using BaseApp.Core.Utils;
+using BaseApp.Face.Services;
+using BaseApp.Face.Utils;
+using BaseApp.Resource.Controls;
+using BaseApp.Services;
+using BaseApp.ViewModels;
+using log4net;
+using MaterialDesignThemes.Wpf;
+using OpenCvSharp;
+using OpenCvSharp.WpfExtensions;
+using System.Windows.Controls;
+using System.Windows.Media;
+using Wpf.Ui;
 
+namespace BaseApp.Views
+{
     /// <summary>
     /// Defines the <see cref="PersonFaceRegistration" />
     /// </summary>

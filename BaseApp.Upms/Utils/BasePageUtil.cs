@@ -1,4 +1,5 @@
-﻿using BaseApp.Upms.Views;
+﻿using BaseApp.Core.Utils;
+using BaseApp.Upms.Views;
 using HandyControl.Controls;
 using log4net;
 using MaterialDesignThemes.Wpf;
@@ -8,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Wpf.Ui.Controls;
 
-namespace BaseApp.Core.Utils
+namespace BaseApp.Utils
 {
     public class BasePageUtil
     {
@@ -59,6 +60,14 @@ namespace BaseApp.Core.Utils
             try
             {
                 Type? cur = Type.GetType(clazz);
+                if (cur == null)
+                {
+                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                    {
+                        if (cur != null) break;
+                        cur = assembly.GetType(clazz);
+                    }
+                }
                 if (cur != null) type = cur;
             }
             catch (Exception e)

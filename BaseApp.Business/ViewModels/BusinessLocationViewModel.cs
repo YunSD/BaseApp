@@ -26,15 +26,14 @@ namespace BaseApp.Business.ViewModels
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<BusinessLocation> repository;
 
-        private readonly IList<BusinessBox> BusinessBoxes;
+        private IList<BusinessBox>? BusinessBoxes;
 
         public BusinessLocationViewModel(IUnitOfWork<BusinessDbContext> unitOfWork)
         {
             _unitOfWork = unitOfWork;
             repository = _unitOfWork.GetRepository<BusinessLocation>();
 
-            IRepository<BusinessBox> box_repository = _unitOfWork.GetRepository<BusinessBox>();
-            BusinessBoxes = box_repository.GetAll().ToList();
+            
         }
 
         #region View Field
@@ -168,6 +167,8 @@ namespace BaseApp.Business.ViewModels
         {
             Task.Run(() =>
             {
+                IRepository<BusinessBox> box_repository = _unitOfWork.GetRepository<BusinessBox>();
+                BusinessBoxes = [.. box_repository.GetAll()];
                 this.OnSearch();
             });
         }

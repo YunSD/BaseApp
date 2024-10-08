@@ -77,17 +77,19 @@ namespace BaseApp.Upms.ViewModels
             ValidateAllProperties();
             if (HasErrors) return;
 
-            entity.RoleId = RoleId;
-            entity.Username = Username;
-            entity.Name = Name;
-            entity.RoleId = RoleId;
-            entity.Phone = Phone;
-            entity.InfoCard = InfoCard;
-            entity.Email = Email;
-            entity.Remark = Remark;
-            entity.LockFlag = LockFlag;
+            SysUser new_entity = MapperUtil.Map<SysUser, SysUser>(entity);
 
-            SubmitEvent(entity);
+            new_entity.RoleId = RoleId;
+            new_entity.Username = Username;
+            new_entity.Name = Name;
+            new_entity.RoleId = RoleId;
+            new_entity.Phone = Phone;
+            new_entity.InfoCard = InfoCard;
+            new_entity.Email = Email;
+            new_entity.Remark = Remark;
+            new_entity.LockFlag = LockFlag;
+
+            SubmitEvent(new_entity);
         }
 
     }

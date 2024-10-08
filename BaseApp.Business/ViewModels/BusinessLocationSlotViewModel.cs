@@ -146,13 +146,13 @@ namespace BaseApp.Business.ViewModels
         [RelayCommand]
         private async Task DelConfirm(BusinessLocationSlotInfo entity)
         {
-            if (!entity.BoxId.HasValue) return;
+            if (!entity.SlotId.HasValue) return;
             var confirm = new ConfirmDialog("确认删除？");
             var result = await DialogHost.Show(confirm, BaseConstant.BaseDialog);
             if (!Equals(result, "true")) return;
 
             // remote
-            repository.Delete(entity.BoxId);
+            repository.Delete(entity.SlotId);
             _unitOfWork.SaveChanges();
             // 刷新
             this.OnSearch();

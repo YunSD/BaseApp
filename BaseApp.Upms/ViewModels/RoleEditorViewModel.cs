@@ -52,11 +52,13 @@ namespace BaseApp.Upms.ViewModels
 
             if (HasErrors) return;
 
-            entity.Name = Name;
-            entity.Code = Code;
-            entity.Remark = Remark;
+            SysRole new_entity = MapperUtil.Map<SysRole, SysRole>(entity);
 
-            SubmitEvent(entity);
+            new_entity.Name = Name;
+            new_entity.Code = Code;
+            new_entity.Remark = Remark;
+
+            SubmitEvent(new_entity);
         }
     }
 }

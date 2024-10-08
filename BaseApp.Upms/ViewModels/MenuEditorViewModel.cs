@@ -76,14 +76,15 @@ namespace BaseApp.Upms.ViewModels
 
             if (HasErrors) return;
 
-            entity.ParentId = ParentId == null ? 0 : ParentId;
-            entity.Name = Name;
-            entity.Icon = Icon;
-            entity.Router = Router;
-            entity.Position = Position;
-            entity.Seq = Seq;
-            entity.Remark = Remark;
-            SubmitEvent(entity);
+            SysMenu new_entity = MapperUtil.Map<SysMenu, SysMenu>(entity);
+            new_entity.ParentId = ParentId == null ? 0 : ParentId;
+            new_entity.Name = Name;
+            new_entity.Icon = Icon;
+            new_entity.Router = Router;
+            new_entity.Position = Position;
+            new_entity.Seq = Seq;
+            new_entity.Remark = Remark;
+            SubmitEvent(new_entity);
         }
     }
 }

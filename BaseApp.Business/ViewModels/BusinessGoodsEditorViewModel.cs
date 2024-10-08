@@ -71,14 +71,15 @@ namespace BaseApp.Business.ViewModels
             ValidateAllProperties();
             if (HasErrors) return;
 
-            this.entity.Name = this.Name;
-            this.entity.Code = this.Code;
-            this.entity.Model = this.Model;
-            this.entity.Unit = this.Unit;
-            this.entity.Image = this.Image;
-            this.entity.Remark = this.Remark;
+            BusinessGoods new_entity = MapperUtil.Map<BusinessGoods, BusinessGoods>(entity);
+            new_entity.Name = this.Name;
+            new_entity.Code = this.Code;
+            new_entity.Model = this.Model;
+            new_entity.Unit = this.Unit;
+            new_entity.Image = this.Image;
+            new_entity.Remark = this.Remark;
 
-            SubmitEvent(entity);
+            SubmitEvent(new_entity);
         }
 
     }

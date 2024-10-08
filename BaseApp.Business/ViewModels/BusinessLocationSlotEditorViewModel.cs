@@ -77,14 +77,15 @@ namespace BaseApp.Business.ViewModels
             ValidateAllProperties();
             if (HasErrors) return;
 
-            entity.BoxId = this.BoxId;
-            entity.LocationId = this.LocationId;
-            entity.Code = this.Code;
-            entity.Name = this.Name;
-            entity.SlotAddress = this.SlotAddress;
-            entity.Remark = this.Remark;
+            BusinessLocationSlot new_entity = MapperUtil.Map<BusinessLocationSlot, BusinessLocationSlot>(entity);
+            new_entity.BoxId = this.BoxId;
+            new_entity.LocationId = this.LocationId;
+            new_entity.Code = this.Code;
+            new_entity.Name = this.Name;
+            new_entity.SlotAddress = this.SlotAddress;
+            new_entity.Remark = this.Remark;
 
-            SubmitEvent(entity);
+            SubmitEvent(new_entity);
         }
 
     }

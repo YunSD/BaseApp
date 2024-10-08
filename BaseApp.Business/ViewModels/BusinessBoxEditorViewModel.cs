@@ -69,13 +69,14 @@ namespace BaseApp.Business.ViewModels
             ValidateAllProperties();
             if (HasErrors) return;
 
-            this.entity.Code = this.Code;
-            this.entity.Name = this.Name;
-            this.entity.LightControlAddress = this.LightControlAddress;
-            this.entity.LockControlAddress = this.LockControlAddress;
-            this.entity.Remark = this.Remark;
+            BusinessBox new_entity = MapperUtil.Map<BusinessBox, BusinessBox>(entity);
+            new_entity.Code = this.Code;
+            new_entity.Name = this.Name;
+            new_entity.LightControlAddress = this.LightControlAddress;
+            new_entity.LockControlAddress = this.LockControlAddress;
+            new_entity.Remark = this.Remark;
 
-            SubmitEvent(entity);
+            SubmitEvent(new_entity);
         }
 
     }

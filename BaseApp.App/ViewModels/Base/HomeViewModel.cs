@@ -2,7 +2,7 @@
 using BaseApp.Core.Security;
 using BaseApp.Core.Security.Messages;
 using BaseApp.Core.Utils;
-using BaseApp.Utils;
+using BaseApp.Resource.Utils;
 using BaseApp.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;

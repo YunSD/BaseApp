@@ -1,5 +1,5 @@
 ﻿using BaseApp.Core.Utils;
-using BaseApp.Utils;
+using BaseApp.Resource.Utils;
 using BaseApp.ViewModels;
 using System.Windows;
 using Wpf.Ui.Controls;

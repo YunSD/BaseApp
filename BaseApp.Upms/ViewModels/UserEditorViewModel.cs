@@ -3,7 +3,6 @@ using BaseApp.Core.Enums;
 using BaseApp.Core.Utils;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MaterialDemo.Domain;
 using MaterialDesignThemes.Wpf;
 using System.ComponentModel.DataAnnotations;
 

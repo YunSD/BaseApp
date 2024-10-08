@@ -7,8 +7,12 @@ namespace BaseApp.Business.Db
     {
 
         public DbSet<BusinessBox> BusinessBoxes { get; set; }
-        public DbSet<BusinessLocation> businessLocations { get; set; }
-        public DbSet<BusinessLocationSlot> businessLocationSlots { get; set; }
+        public DbSet<BusinessLocation> BusinessLocations { get; set; }
+        public DbSet<BusinessLocationSlot> BusinessLocationSlots { get; set; }
+        public DbSet<BusinessGoods> BusinessGoods { get; set; }
+        public DbSet<BusinessLogsLogin> BusinessLogsLogins { get; set; }
+        public DbSet<BusinessLogsOpen> BusinessLogsOpens { get; set; }
+        public DbSet<BusinessLogsCharge> BusinessLogsCharges { get; set; }
 
         public BusinessDbContext(DbContextOptions options) : base(options)
         {

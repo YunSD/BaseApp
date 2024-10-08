@@ -2,15 +2,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MaterialDemo.Domain.Models.Entity
+namespace BaseApp.Business.Domain
 {
-    [Table("business_tool")]
-    public class BusinessTool : BaseEntity
+    [Table("business_goods")]
+    public class BusinessGoods : BaseEntity
     {
 
         [Key]
-        [Column("tool_id")]
-        public long? ToolId { get; set; }
+        [Column("goods_id")]
+        public long? GoodsId { get; set; }
 
         public string? Name { get; set; }
 

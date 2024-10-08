@@ -1,12 +1,14 @@
-﻿<UserControl x:Class="BaseApp.Business.Views.BusinessLocationEditorView"
+﻿<UserControl x:Class="BaseApp.Business.Views.BusinessLocationSlotEditorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:behaviors="clr-namespace:BaseApp.Resource.Behavior;assembly=BaseApp.Resource"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:BaseApp.Business.ViewModels;assembly=BaseApp.Business"
              xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DataContext="{d:DesignInstance Type=local:BusinessLocationSlotEditorViewModel}"
              d:DesignHeight="650"
              d:DesignWidth="800"
              Background="{DynamicResource FormBackgroundBrush}"
@@ -34,7 +36,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -42,37 +43,41 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,15,0,15" Orientation="Horizontal">
-                    <TextBlock Width="90" Style="{StaticResource BaseFormTextBlock}" Text="箱体信息:" />
-                    <ComboBox x:Name="BoxCombo"
-                              Width="210"
-                              Height="37"
-                              DisplayMemberPath="Name"
-                              IsEditable="False"
-                              ItemsSource="{Binding ViewModel.Boxes}"
-                              SelectionChanged="ComboBox_SelectionChanged"
-                              Style="{StaticResource BaseComboBoxFormTextBox}" />
+                    <TextBlock Width="90" Style="{StaticResource BaseFormTextBlock}" Text="插座名称:" />
+                    <TextBox Width="210" materialDesign:HintAssist.Hint="请输入..." Style="{StaticResource BaseFormTextBox}" Text="{Binding ViewModel.Name}" />
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,15,0,15" Orientation="Horizontal">
+                    <TextBlock Width="90" Style="{StaticResource BaseFormTextBlock}" Text="归属箱格:" />
+                    <hc:ElementGroup Layout="Stack" Orientation="Horizontal">
+                        <TextBox Width="140"
+                                 HorizontalAlignment="Stretch"
+                                 materialDesign:HintAssist.Hint="请选择归属箱格"
+                                 DockPanel.Dock="Left"
+                                 IsEnabled="False"
+                                 Style="{StaticResource BaseFormTextBox}"
+                                 Text="{Binding ViewModel.LocationInfo}" />
+                        <Button Grid.Column="1"
+                                Width="70"
+                                Height="37"
+                                Click="Button_Click"
+                                Content="选择"
+                                DockPanel.Dock="Right"
+                                Style="{StaticResource ButtonPrimary}" />
+                    </hc:ElementGroup>
                 </StackPanel>
 
 
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,15,0,15" Orientation="Horizontal">
-                    <TextBlock Width="90" Style="{StaticResource BaseFormTextBlock}" Text="箱格名称:" />
-                    <TextBox Width="210" materialDesign:HintAssist.Hint="请输入..." Style="{StaticResource BaseFormTextBox}" Text="{Binding ViewModel.Name}" />
-                </StackPanel>
-                <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,15,0,15" Orientation="Horizontal">
-                    <TextBlock Width="90" Style="{StaticResource BaseFormTextBlock}" Text="箱格编码:" />
+                    <TextBlock Width="90" Style="{StaticResource BaseFormTextBlock}" Text="插座编码:" />
                     <TextBox Width="210" materialDesign:HintAssist.Hint="请输入..." Style="{StaticResource BaseFormTextBox}" Text="{Binding ViewModel.Code}" />
                 </StackPanel>
 
-                <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,15,0,15" Orientation="Horizontal">
-                    <TextBlock Width="90" Style="{StaticResource BaseFormTextBlock}" Text="灯光控制器:" />
-                    <TextBox Width="210" materialDesign:HintAssist.Hint="请输入..." Style="{StaticResource BaseFormTextBox}" Text="{Binding ViewModel.LightAddress}" />
-                </StackPanel>
-                <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,15,0,15" Orientation="Horizontal">
-                    <TextBlock Width="90" Style="{StaticResource BaseFormTextBlock}" Text="开关控制器:" />
-                    <TextBox Width="210" materialDesign:HintAssist.Hint="请输入..." Style="{StaticResource BaseFormTextBox}" Text="{Binding ViewModel.LockAddress}" />
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,15,0,15" Orientation="Horizontal">
+                    <TextBlock Width="90" Style="{StaticResource BaseFormTextBlock}" Text="插座控制器:" />
+                    <TextBox Width="210" materialDesign:HintAssist.Hint="请输入..." Style="{StaticResource BaseFormTextBox}" Text="{Binding ViewModel.SlotAddress}" />
                 </StackPanel>
 
-                <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,15,0,15" Orientation="Horizontal">
+                <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,15,0,15" Orientation="Horizontal">
                     <TextBlock Width="90" Padding="15,0,15,0" Style="{StaticResource BaseFormTextBlock}" Text="备注:" />
                     <TextBox Width="510" materialDesign:HintAssist.Hint="请输入备注..." Style="{StaticResource BaseFormTextBox}" Text="{Binding ViewModel.Remark}" />
                 </StackPanel>

@@ -1,0 +1,158 @@
+﻿<Page x:Class="BaseApp.Business.Views.BusinessLocationSlotViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:converters="clr-namespace:BaseApp.Resource.Converters;assembly=BaseApp.Resource"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:local="clr-namespace:BaseApp.Business.ViewModels;assembly=BaseApp.Business"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      d:DataContext="{d:DesignInstance Type=local:BusinessLocationSlotViewModel}"
+      d:DesignHeight="450"
+      d:DesignWidth="1000"
+      Background="Transparent"
+      ScrollViewer.CanContentScroll="False"
+      mc:Ignorable="d">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/BaseApp.Upms;component/Resources/CommonGrid.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:TableLevelConverter x:Key="TableLevelConverter" LevelWidth="10" />
+            <converters:TableVisibilityConverter x:Key="TableVisibilityConverter" />
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid ScrollViewer.CanContentScroll="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource BaseTableSearchBorder}">
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <hc:TextBox Width="260"
+                            Margin="30,18,0,15"
+                            hc:FontWeight="Bold"
+                            hc:InfoElement.Placeholder="请输入..."
+                            hc:InfoElement.ShowClearButton="True"
+                            hc:InfoElement.Title="插座名称"
+                            hc:InfoElement.TitlePlacement="Left"
+                            hc:InfoElement.TitleWidth="60"
+                            Foreground="{DynamicResource InputForeground}"
+                            Text="{Binding ViewModel.SearchName}" />
+                <hc:TextBox Width="260"
+                            Margin="30,18,0,15"
+                            hc:FontWeight="Bold"
+                            hc:InfoElement.Placeholder="请输入..."
+                            hc:InfoElement.ShowClearButton="True"
+                            hc:InfoElement.Title="插座编码"
+                            hc:InfoElement.TitlePlacement="Left"
+                            hc:InfoElement.TitleWidth="60"
+                            Foreground="{DynamicResource InputForeground}"
+                            Text="{Binding ViewModel.SearchCode}" />
+
+                <GridSplitter Margin="20,0,50,0" />
+                <Button Command="{Binding ViewModel.SearchCommand}" Foreground="{DynamicResource ButtonForegroundBrush}" Style="{StaticResource MaterialDesignFlatMidBgButton}" ToolTip="通过查询条件检索">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="MagnifyExpand" Style="{StaticResource BaseTableSearchButtonPackIcon}" />
+                        <TextBlock Style="{StaticResource BaseTableSearchButtonTextBlock}" Text="查询" />
+                    </StackPanel>
+                </Button>
+                <GridSplitter Margin="10,0,10,0" />
+                <Button Command="{Binding ViewModel.RefreshCommand}" Style="{StaticResource MaterialDesignOutlinedDarkButton}" ToolTip="重置查询条件">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Refresh" Style="{StaticResource BaseTableSearchButtonPackIcon}" />
+                        <TextBlock Style="{StaticResource BaseTableSearchButtonTextBlock}" Text="重置" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1" ScrollViewer.CanContentScroll="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Style="{StaticResource BaseTableToolBorder}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" FontWeight="Bold" Style="{StaticResource MaterialDesignTitleLargeTextBlock}" Text="插座列表" />
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button HorizontalAlignment="Right"
+                                Background="{StaticResource TableHeadAddBrush}"
+                                BorderBrush="{StaticResource TableHeadAddBrush}"
+                                Command="{Binding ViewModel.OpenEditFormCommand}"
+                                Foreground="{DynamicResource ButtonForegroundBrush}"
+                                Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                                ToolTip="新增数据">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Add" Style="{StaticResource BaseTableSearchButtonPackIcon}" />
+                                <TextBlock Style="{StaticResource BaseTableToolButtonTextBlock}" Text="新增" />
+                            </StackPanel>
+                        </Button>
+                        <GridSplitter Margin="10,0,10,0" />
+                        <Button HorizontalAlignment="Right" Command="{Binding ViewModel.RefreshCommand}" Style="{StaticResource MaterialDesignOutlinedDarkButton}" ToolTip="刷新">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Refresh" Style="{StaticResource BaseTableSearchButtonPackIcon}" />
+                                <TextBlock Style="{StaticResource BaseTableToolButtonTextBlock}" Text="刷新" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <DataGrid Grid.Row="1"
+                      HorizontalAlignment="Stretch"
+                      AutoGenerateColumns="False"
+                      CellStyle="{StaticResource DataGridCellStyle}"
+                      HeadersVisibility="All"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding ViewModel.DataList}"
+                      RowHeaderWidth="60"
+                      RowStyle="{StaticResource DataGridRowStyle}"
+                      ScrollViewer.CanContentScroll="True">
+                <DataGrid.RowHeaderTemplate>
+                    <DataTemplate>
+                        <CheckBox HorizontalAlignment="Center" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
+                    </DataTemplate>
+                </DataGrid.RowHeaderTemplate>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Binding="{Binding BoxInfo}" CanUserSort="False" Header="所属箱体" />
+                    <DataGridTextColumn Width="*" Binding="{Binding LocationInfo}" CanUserSort="False" Header="所属箱格" />
+                    <DataGridTextColumn Width="*" Binding="{Binding Name}" CanUserSort="False" Header="插座名称" />
+                    <DataGridTextColumn Width="*" Binding="{Binding Code}" CanUserSort="False" Header="插座编码" />
+                    <DataGridTextColumn Width="*" Binding="{Binding SlotAddress}" CanUserSort="False" Header="控制器地址" />
+                    <DataGridTextColumn Width="*" Binding="{Binding Remark}" CanUserSort="False" Header="备注" />
+
+                    <DataGridTemplateColumn Width="*" CanUserResize="False" Header="操作">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                    <Button Background="White" Command="{Binding DataContext.ViewModel.OpenEditFormCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding}" Foreground="{StaticResource TableRowEditBrush}" Style="{StaticResource BaseTableGirdRowButton}" ToolTip="编辑">
+                                        <materialDesign:PackIcon Kind="FileDocumentEditOutline" Style="{StaticResource BaseTableGirdRowButtonPackIcon}" />
+
+                                    </Button>
+                                    <GridSplitter Style="{StaticResource BaseTableGirdRowGridSplitter}" />
+                                    <Button Command="{Binding DataContext.ViewModel.DelConfirmCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding}" Foreground="{StaticResource TableRowDeleteBrush}" Style="{StaticResource BaseTableGirdRowButton}" ToolTip="删除">
+                                        <materialDesign:PackIcon Kind="DeleteSweepOutline" Style="{StaticResource BaseTableGirdRowButtonPackIcon}" />
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

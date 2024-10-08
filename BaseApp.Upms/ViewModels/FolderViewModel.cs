@@ -3,7 +3,7 @@ using BaseApp.Core.Domain;
 using BaseApp.Core.Security;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Resource.Controls;
-using BaseApp.Utils;
+using BaseApp.Resource.Utils;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using Wpf.Ui.Controls;

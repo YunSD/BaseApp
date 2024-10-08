@@ -21,8 +21,8 @@
     <SolidColorBrush x:Key="InputForeground" Color="#0D062D" />
 
     <SolidColorBrush x:Key="BaseSuccessBrush" Color="DarkGreen" />
-    <SolidColorBrush x:Key="BaseWarnBrush" Color="OrangeRed" />
-    <SolidColorBrush x:Key="BaseErrorBrush" Color="#DB261D" />
+    <SolidColorBrush x:Key="BaseWarnBrush" Color="#BB1B21" />
+    <SolidColorBrush x:Key="BaseErrorBrush" Color="#BB1B21" />
 
 
 
@@ -33,7 +33,7 @@
     <SolidColorBrush x:Key="TableHeadAddBrush" Color="#2E7D32" />
 
     <SolidColorBrush x:Key="TableRowEditBrush" Color="#2E7D32" />
-    <SolidColorBrush x:Key="TableRowDeleteBrush" Color="#DB261D" />
+    <SolidColorBrush x:Key="TableRowDeleteBrush" Color="#BB1B21" />
     <SolidColorBrush x:Key="TableRowWarnBrush" Color="MediumPurple" />
 
     <!--  FORM  -->

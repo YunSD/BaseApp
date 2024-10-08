@@ -1,9 +1,9 @@
 ﻿using BaseApp.Business.Domain;
 using BaseApp.Business.ViewModels.VO;
+using BaseApp.Core.Domain;
 using BaseApp.Core.Utils;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MaterialDemo.Domain;
 using MaterialDesignThemes.Wpf;
 using System.ComponentModel.DataAnnotations;
 

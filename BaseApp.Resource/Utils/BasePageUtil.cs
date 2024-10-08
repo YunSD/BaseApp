@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Wpf.Ui.Controls;
 
-namespace BaseApp.Utils
+namespace BaseApp.Resource.Utils
 {
     public class BasePageUtil
     {

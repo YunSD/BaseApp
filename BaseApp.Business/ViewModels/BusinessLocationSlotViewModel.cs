@@ -19,22 +19,22 @@ using Wpf.Ui.Controls;
 
 namespace BaseApp.Business.ViewModels
 {
-    public partial class BusinessLocationViewModel : PageViewModelBase<BusinessLocationInfo>, INavigationAware
+    public partial class BusinessLocationSlotViewModel : PageViewModelBase<BusinessLocationSlotInfo>, INavigationAware
     {
 
-        private ILog logger = LogManager.GetLogger(nameof(BusinessLocationViewModel));
+        private ILog logger = LogManager.GetLogger(nameof(BusinessLocationSlotViewModel));
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRepository<BusinessLocation> repository;
+        private readonly IRepository<BusinessLocationSlot> repository;
 
-        private readonly IList<BusinessBox> BusinessBoxes;
+        private IList<BusinessBox>? BusinessBoxes;
+        private IList<BusinessLocation>? BusinessLocations;
 
-        public BusinessLocationViewModel(IUnitOfWork<BusinessDbContext> unitOfWork)
+        public BusinessLocationSlotViewModel(IUnitOfWork<BusinessDbContext> unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            repository = _unitOfWork.GetRepository<BusinessLocation>();
+            repository = _unitOfWork.GetRepository<BusinessLocationSlot>();
 
-            IRepository<BusinessBox> box_repository = _unitOfWork.GetRepository<BusinessBox>();
-            BusinessBoxes = box_repository.GetAll().ToList();
+            
         }
 
         #region View Field
@@ -50,17 +50,18 @@ namespace BaseApp.Business.ViewModels
         private void OnSearch()
         {
 
-            Expression<Func<BusinessLocation, bool>> expression = ex => true;
+            Expression<Func<BusinessLocationSlot, bool>> expression = ex => true;
             if (!string.IsNullOrWhiteSpace(SearchCode)) expression = expression.MergeAnd(expression, exp => exp.Code != null && exp.Code.Contains(SearchCode));
             if (!string.IsNullOrWhiteSpace(SearchName)) expression = expression.MergeAnd(expression, exp => exp.Name != null && exp.Name.Contains(SearchName));
 
-            Func<IQueryable<BusinessLocation>, IOrderedQueryable<BusinessLocation>> orderBy = q => q.OrderBy(u => u.Code);
+            Func<IQueryable<BusinessLocationSlot>, IOrderedQueryable<BusinessLocationSlot>> orderBy = q => q.OrderBy(u => u.Code);
 
-            IPagedList<BusinessLocation> pageList = repository.GetPagedList(predicate: expression, orderBy: orderBy, pageIndex: this.PageIndex, pageSize: PageSize);
+            IPagedList<BusinessLocationSlot> pageList = repository.GetPagedList(predicate: expression, orderBy: orderBy, pageIndex: this.PageIndex, pageSize: PageSize);
 
             var data = pageList.Items.Select(e => {
-                BusinessLocationInfo viewInfo = MapperUtil.Map<BusinessLocation, BusinessLocationInfo>(e);
-                BusinessBoxes.Where(box => box.BoxId == viewInfo.BoxId).GetFirstIfPresent(entity => viewInfo.BoxInfo = entity.Name);
+                BusinessLocationSlotInfo viewInfo = MapperUtil.Map<BusinessLocationSlot, BusinessLocationSlotInfo>(e);
+                BusinessBoxes?.Where(box => box.BoxId == viewInfo.BoxId).GetFirstIfPresent(entity => viewInfo.BoxInfo = entity.Name);
+                BusinessLocations?.Where(location => location.LocationId == viewInfo.LocationId).GetFirstIfPresent(entity => viewInfo.LocationInfo = entity.Name);
                 return viewInfo;
             }).ToList();
 
@@ -95,13 +96,13 @@ namespace BaseApp.Business.ViewModels
         /// </summary>
         /// <returns></returns>
         [RelayCommand]
-        private async Task OpenEditForm(BusinessLocationInfo? entity)
+        private async Task OpenEditForm(BusinessLocationSlotInfo? entity)
         {
-            BusinessLocationInfo data = new();
+            BusinessLocationSlotInfo data = new();
             if (entity != null) data = entity;
             
-            BusinessLocationEditorViewModel editorViewModel = new BusinessLocationEditorViewModel(data, BusinessBoxes, SubmitEventHandler);
-            BusinessLocationEditorView form = new BusinessLocationEditorView(editorViewModel);
+            BusinessLocationSlotEditorViewModel editorViewModel = new BusinessLocationSlotEditorViewModel(data, SubmitEventHandler);
+            BusinessLocationSlotEditorView form = new BusinessLocationSlotEditorView(editorViewModel, ServiceProviderUtil.GetRequiredService<BusinessLocationViewModel>());
 
             var result = await DialogHost.Show(form, BaseConstant.BaseDialog);
         }
@@ -110,10 +111,10 @@ namespace BaseApp.Business.ViewModels
         /// <summary>
         /// form save command
         /// </summary>
-        private void SubmitEventHandler(BusinessLocation entity)
+        private void SubmitEventHandler(BusinessLocationSlot entity)
         {
 
-            Expression<Func<BusinessLocation, bool>> pre = p => p.Code == entity.Code && p.LocationId != entity.LocationId;
+            Expression<Func<BusinessLocationSlot, bool>> pre = p => p.Code == entity.Code && p.SlotId != entity.SlotId;
 
             if (repository.Exists(pre))
             {
@@ -121,9 +122,9 @@ namespace BaseApp.Business.ViewModels
                 return;
             }
 
-            if (!entity.LocationId.HasValue)
+            if (!entity.SlotId.HasValue)
             {
-                entity.LocationId = SnowflakeIdWorker.Singleton.nextId();
+                entity.SlotId = SnowflakeIdWorker.Singleton.nextId();
                 repository.Insert(entity);
             }
             else
@@ -143,7 +144,7 @@ namespace BaseApp.Business.ViewModels
         /// </summary>
         /// <returns></returns>
         [RelayCommand]
-        private async Task DelConfirm(BusinessLocation entity)
+        private async Task DelConfirm(BusinessLocationSlotInfo entity)
         {
             if (!entity.BoxId.HasValue) return;
             var confirm = new ConfirmDialog("确认删除？");
@@ -168,6 +169,11 @@ namespace BaseApp.Business.ViewModels
         {
             Task.Run(() =>
             {
+                IRepository<BusinessBox> box_repository = _unitOfWork.GetRepository<BusinessBox>();
+                BusinessBoxes = box_repository.GetAll().ToList();
+
+                IRepository<BusinessLocation> location_repository = _unitOfWork.GetRepository<BusinessLocation>();
+                BusinessLocations = location_repository.GetAll().ToList();
                 this.OnSearch();
             });
         }

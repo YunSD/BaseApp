@@ -23,8 +23,5 @@ namespace BaseApp.Business.Domain
 
         [Column("slot_address")]
         public string? SlotAddress { get; set; }
-
-        [Column("lock_address")]
-        public string? LockAddress { get; set; }
     }
 }

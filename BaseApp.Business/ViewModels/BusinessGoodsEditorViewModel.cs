@@ -8,71 +8,74 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BaseApp.Business.ViewModels
 {
-    public partial class BusinessBoxEditorViewModel : ObservableValidator
+    public partial class BusinessGoodsEditorViewModel : ObservableValidator
     {
         [ObservableProperty]
         private bool editModel = true;
 
-        private BusinessBox entity;
+        private BusinessGoods entity;
 
         [Required(ErrorMessage = "该字段不能为空")]
         [ObservableProperty]
         private string? name;
+
         partial void OnNameChanged(string? value) => ValidateProperty(value, nameof(Name));
+
 
         [Required(ErrorMessage = "该字段不能为空")]
         [ObservableProperty]
         private string? code;
         partial void OnCodeChanged(string? value) => ValidateProperty(value, nameof(Code));
 
-        [Required(ErrorMessage = "该字段不能为空")]
         [ObservableProperty]
-        public string? lightControlAddress;
-        partial void OnLightControlAddressChanged(string? value) => ValidateProperty(value, nameof(LightControlAddress));
+        public string? model;
 
-
-        [Required(ErrorMessage = "该字段不能为空")]
         [ObservableProperty]
-        public string? lockControlAddress;
-        partial void OnLockControlAddressChanged(string? value) => ValidateProperty(value, nameof(LockControlAddress));
+        private string? unit;
 
+
+        [ObservableProperty]
+        private string? image;
 
         [ObservableProperty]
         private string? remark;
 
 
+        private FormSubmitEventHandler<BusinessGoods> SubmitEvent;
 
-        private FormSubmitEventHandler<BusinessBox> SubmitEvent;
-
-        public BusinessBoxEditorViewModel(BusinessBox entity, FormSubmitEventHandler<BusinessBox> submitEvent)
+        public BusinessGoodsEditorViewModel(BusinessGoods entity, FormSubmitEventHandler<BusinessGoods> submitEvent)
         {
 
             this.SubmitEvent = submitEvent;
             this.entity = entity;
 
-            if (entity.BoxId.HasValue)
+            if (entity.GoodsId.HasValue)
             {
                 editModel = false;
             }
-            this.Code = entity.Code;
-            this.Name = entity.Name;
 
-            this.LightControlAddress = entity.LightControlAddress;
-            this.LockControlAddress = entity.LockControlAddress;
+            this.Name = entity.Name;
+            this.Code = entity.Code;
+            this.model = entity.Model;
+            this.unit = entity.Unit;
+            this.Image = entity.Image;
             this.Remark = entity.Remark;
         }
 
         [RelayCommand]
-        private void Submit()
+        private void submit()
         {
+
             if (!DialogHost.IsDialogOpen(BaseConstant.BaseDialog)) return;
+
             ValidateAllProperties();
             if (HasErrors) return;
 
-            this.entity.Code = this.Code;
             this.entity.Name = this.Name;
-            this.entity.LightControlAddress = this.LightControlAddress;
-            this.entity.LockControlAddress = this.LockControlAddress;
+            this.entity.Code = this.Code;
+            this.entity.Model = this.Model;
+            this.entity.Unit = this.Unit;
+            this.entity.Image = this.Image;
             this.entity.Remark = this.Remark;
 
             SubmitEvent(entity);

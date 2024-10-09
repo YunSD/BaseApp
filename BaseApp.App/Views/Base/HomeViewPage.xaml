@@ -38,6 +38,7 @@
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
                     <ToggleButton Click="NavigationToggle" Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
@@ -73,6 +74,14 @@
                             </MenuItem>
                         </MenuItem>
                     </Menu>
+                </StackPanel>
+                <StackPanel Grid.Column="3" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Button Width="40" Height="40" materialDesign:RippleAssist.Feedback="Black" Foreground="Gray" Style="{StaticResource MaterialDesignIconButton}" ToolTip="MaterialDesignRaisedLightButton with Round Corners">
+                        <materialDesign:PackIcon Kind="Minus" />
+                    </Button>
+                    <Button Width="40" Height="40" materialDesign:RippleAssist.Feedback="Black" Foreground="Gray" Style="{StaticResource MaterialDesignIconButton}" ToolTip="MaterialDesignRaisedLightButton with Round Corners">
+                        <materialDesign:PackIcon Kind="Close" />
+                    </Button>
                 </StackPanel>
             </Grid>
         </materialDesign:ColorZone>

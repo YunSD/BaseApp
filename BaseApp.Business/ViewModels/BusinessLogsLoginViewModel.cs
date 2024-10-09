@@ -20,20 +20,20 @@ using Wpf.Ui.Controls;
 
 namespace BaseApp.Business.ViewModels
 {
-    public partial class BusinessLogsOpenViewModel : PageViewModelBase<BusinessLogsOpen>, INavigationAware
+    public partial class BusinessLogsLoginViewModel : PageViewModelBase<BusinessLogsLogin>, INavigationAware
     {
 
-        private ILog logger = LogManager.GetLogger(nameof(BusinessLogsOpenViewModel));
+        private ILog logger = LogManager.GetLogger(nameof(BusinessLogsLoginViewModel));
         
         private readonly IUnitOfWork<BusinessDbContext> business_unitOfWork;
         
-        private readonly IRepository<BusinessLogsOpen> repository;
+        private readonly IRepository<BusinessLogsLogin> repository;
 
-        public BusinessLogsOpenViewModel(IUnitOfWork<BaseDbContext> base_unitOfWork, IUnitOfWork<BusinessDbContext> business_unitOfWork)
+        public BusinessLogsLoginViewModel(IUnitOfWork<BaseDbContext> base_unitOfWork, IUnitOfWork<BusinessDbContext> business_unitOfWork)
         {
             this.business_unitOfWork = business_unitOfWork;
 
-            repository = business_unitOfWork.GetRepository<BusinessLogsOpen>();
+            repository = business_unitOfWork.GetRepository<BusinessLogsLogin>();
         }
 
         #region View Field
@@ -55,15 +55,15 @@ namespace BaseApp.Business.ViewModels
         private void OnSearch()
         {
 
-            Expression<Func<BusinessLogsOpen, bool>> expression = ex => true;
+            Expression<Func<BusinessLogsLogin, bool>> expression = ex => true;
             if (!string.IsNullOrWhiteSpace(SearchUsername)) expression = expression.MergeAnd(expression, exp => exp.Username != null && exp.Username.Contains(SearchUsername));
             if (!string.IsNullOrWhiteSpace(SearchName)) expression = expression.MergeAnd(expression, exp => exp.Name != null && exp.Name.Contains(SearchName));
             if (SearchStartDate != null) { expression = expression.MergeAnd(expression, exp => exp.CreateTime != null && exp.CreateTime >= SearchStartDate); }
             if (SearchEndDate != null) { expression = expression.MergeAnd(expression, exp => exp.CreateTime != null && exp.CreateTime <= SearchEndDate.Value.AddDays(1)); }
 
-            Func<IQueryable<BusinessLogsOpen>, IOrderedQueryable<BusinessLogsOpen>> orderBy = q => q.OrderByDescending(u => u.CreateTime);
+            Func<IQueryable<BusinessLogsLogin>, IOrderedQueryable<BusinessLogsLogin>> orderBy = q => q.OrderByDescending(u => u.CreateTime);
             
-            IPagedList<BusinessLogsOpen> pageList = repository.GetPagedList(predicate: expression, orderBy: orderBy, pageIndex: this.PageIndex, pageSize: PageSize);
+            IPagedList<BusinessLogsLogin> pageList = repository.GetPagedList(predicate: expression, orderBy: orderBy, pageIndex: this.PageIndex, pageSize: PageSize);
 
             base.RefreshPageInfo(pageList);
         }

@@ -1,46 +1,41 @@
 ﻿using BaseApp.Business.Db;
 using BaseApp.Business.Domain;
-using BaseApp.Business.ViewModels.VO;
-using BaseApp.Business.Views;
 using BaseApp.Core.Db;
 using BaseApp.Core.Domain;
 using BaseApp.Core.Extensions;
 using BaseApp.Core.UnitOfWork;
 using BaseApp.Core.UnitOfWork.Collections;
-using BaseApp.Core.Utils;
-using BaseApp.Resource.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HandyControl.Data;
 using log4net;
-using MaterialDesignThemes.Wpf;
 using System.Linq.Expressions;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 
 namespace BaseApp.Business.ViewModels
 {
-    public partial class BusinessLogsOpenViewModel : PageViewModelBase<BusinessLogsOpen>, INavigationAware
+    public partial class BusinessLogsChargeViewModel : PageViewModelBase<BusinessLogsCharge>, INavigationAware
     {
 
-        private ILog logger = LogManager.GetLogger(nameof(BusinessLogsOpenViewModel));
+        private ILog logger = LogManager.GetLogger(nameof(BusinessLogsChargeViewModel));
         
         private readonly IUnitOfWork<BusinessDbContext> business_unitOfWork;
         
-        private readonly IRepository<BusinessLogsOpen> repository;
+        private readonly IRepository<BusinessLogsCharge> repository;
 
-        public BusinessLogsOpenViewModel(IUnitOfWork<BaseDbContext> base_unitOfWork, IUnitOfWork<BusinessDbContext> business_unitOfWork)
+        public BusinessLogsChargeViewModel(IUnitOfWork<BaseDbContext> base_unitOfWork, IUnitOfWork<BusinessDbContext> business_unitOfWork)
         {
             this.business_unitOfWork = business_unitOfWork;
 
-            repository = business_unitOfWork.GetRepository<BusinessLogsOpen>();
+            repository = business_unitOfWork.GetRepository<BusinessLogsCharge>();
         }
 
         #region View Field
 
         [ObservableProperty]
         private string? _searchUsername;
-
+        
         [ObservableProperty]
         private string? _searchName;
 
@@ -55,15 +50,15 @@ namespace BaseApp.Business.ViewModels
         private void OnSearch()
         {
 
-            Expression<Func<BusinessLogsOpen, bool>> expression = ex => true;
+            Expression<Func<BusinessLogsCharge, bool>> expression = ex => true;
             if (!string.IsNullOrWhiteSpace(SearchUsername)) expression = expression.MergeAnd(expression, exp => exp.Username != null && exp.Username.Contains(SearchUsername));
             if (!string.IsNullOrWhiteSpace(SearchName)) expression = expression.MergeAnd(expression, exp => exp.Name != null && exp.Name.Contains(SearchName));
             if (SearchStartDate != null) { expression = expression.MergeAnd(expression, exp => exp.CreateTime != null && exp.CreateTime >= SearchStartDate); }
             if (SearchEndDate != null) { expression = expression.MergeAnd(expression, exp => exp.CreateTime != null && exp.CreateTime <= SearchEndDate.Value.AddDays(1)); }
 
-            Func<IQueryable<BusinessLogsOpen>, IOrderedQueryable<BusinessLogsOpen>> orderBy = q => q.OrderByDescending(u => u.CreateTime);
+            Func<IQueryable<BusinessLogsCharge>, IOrderedQueryable<BusinessLogsCharge>> orderBy = q => q.OrderByDescending(u => u.CreateTime);
             
-            IPagedList<BusinessLogsOpen> pageList = repository.GetPagedList(predicate: expression, orderBy: orderBy, pageIndex: this.PageIndex, pageSize: PageSize);
+            IPagedList<BusinessLogsCharge> pageList = repository.GetPagedList(predicate: expression, orderBy: orderBy, pageIndex: this.PageIndex, pageSize: PageSize);
 
             base.RefreshPageInfo(pageList);
         }

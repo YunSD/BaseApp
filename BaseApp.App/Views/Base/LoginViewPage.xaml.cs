@@ -166,6 +166,23 @@ namespace BaseApp.Views
             WeakReferenceMessenger.Default.UnregisterAll(this);
             Dispatcher.Invoke(() => UnloadCameraReader());
         }
+
+        private void KeyboardVariant_Button_Click(object sender, RoutedEventArgs e)
+        {
+            KeyboardHelper.ShowOnScreenKeyboard();
+        }
+
+        private void Minus_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = ServiceProviderUtil.GetRequiredService<MainWindow>();
+            window.SetCurrentValue(System.Windows.Window.WindowStateProperty, WindowState.Minimized);
+        }
+
+        private void Close_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = ServiceProviderUtil.GetRequiredService<MainWindow>();
+            window.Close();
+        }
     }
 }
 

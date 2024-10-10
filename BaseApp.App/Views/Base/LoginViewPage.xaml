@@ -54,16 +54,47 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="3*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Margin="45,30,0,0" VerticalAlignment="Center" IsHitTestVisible="False" Orientation="Horizontal">
+                <StackPanel Grid.Row="0" Margin="0,0,30,0" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Button Width="40"
+                            Height="40"
+                            materialDesign:RippleAssist.Feedback="Black"
+                            Click="KeyboardVariant_Button_Click"
+                            Foreground="Gray"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="屏幕键盘">
+                        <materialDesign:PackIcon Kind="KeyboardVariant" />
+                    </Button>
+                    <Button Width="40"
+                            Height="40"
+                            materialDesign:RippleAssist.Feedback="Black"
+                            Click="Minus_Button_Click"
+                            Foreground="Gray"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="最小化">
+                        <materialDesign:PackIcon Kind="Minus" />
+                    </Button>
+                    <Button Width="40"
+                            Height="40"
+                            materialDesign:RippleAssist.Feedback="Black"
+                            Click="Close_Button_Click"
+                            Foreground="Gray"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="关闭">
+                        <materialDesign:PackIcon Kind="Close" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Margin="45,10,0,0" VerticalAlignment="Center" IsHitTestVisible="False" Orientation="Horizontal">
                     <Image Width="30" Height="30" Source="pack://application:,,,/Assets/icon.png" />
                     <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" FontSize="20" FontWeight="SemiBold" Text="{Binding MainWindowViewModel.ApplicationTitle, Mode=OneWay}" />
                 </StackPanel>
 
-                <Grid Grid.Row="2" VerticalAlignment="Stretch">
+                <Grid Grid.Row="3" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -152,8 +183,8 @@
                                     <PasswordBox x:Name="PasswordBox" hc:InfoElement.Placeholder="请输入密码." InputMethod.IsInputMethodEnabled="False" Style="{StaticResource PasswordBoxControl}" />
                                 </Grid>
                             </Border>
-
                             <Button x:Name="SignIn" Click="SignIn_Click" Content="Sign In" Style="{StaticResource submitButton}" />
+
                         </StackPanel>
 
                         <StackPanel x:Name="CARD" Visibility="{Binding LoginViewModel.LoginType, Converter={StaticResource BaseVisibilityConverter}, ConverterParameter=CARD}">

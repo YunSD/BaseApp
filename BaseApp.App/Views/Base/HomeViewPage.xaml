@@ -76,10 +76,31 @@
                     </Menu>
                 </StackPanel>
                 <StackPanel Grid.Column="3" VerticalAlignment="Center" Orientation="Horizontal">
-                    <Button Width="40" Height="40" materialDesign:RippleAssist.Feedback="Black" Foreground="Gray" Style="{StaticResource MaterialDesignIconButton}" ToolTip="MaterialDesignRaisedLightButton with Round Corners">
+                    <Button Width="40"
+                            Height="40"
+                            materialDesign:RippleAssist.Feedback="Black"
+                            Click="KeyboardVariant_Button_Click"
+                            Foreground="Gray"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="屏幕键盘">
+                        <materialDesign:PackIcon Kind="KeyboardVariant" />
+                    </Button>
+                    <Button Width="40"
+                            Height="40"
+                            materialDesign:RippleAssist.Feedback="Black"
+                            Click="Minus_Button_Click"
+                            Foreground="Gray"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="最小化">
                         <materialDesign:PackIcon Kind="Minus" />
                     </Button>
-                    <Button Width="40" Height="40" materialDesign:RippleAssist.Feedback="Black" Foreground="Gray" Style="{StaticResource MaterialDesignIconButton}" ToolTip="MaterialDesignRaisedLightButton with Round Corners">
+                    <Button Width="40"
+                            Height="40"
+                            materialDesign:RippleAssist.Feedback="Black"
+                            Click="Close_Button_Click"
+                            Foreground="Gray"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="关闭">
                         <materialDesign:PackIcon Kind="Close" />
                     </Button>
                 </StackPanel>

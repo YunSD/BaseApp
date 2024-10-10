@@ -35,12 +35,14 @@
   <ItemGroup>
     <None Remove="Assets\background.png" />
     <None Remove="Assets\cover.png" />
-    <None Remove="Assets\icon.ico" />
     <None Remove="Assets\icon.png" />
+    <None Remove="Assets\icon1.ico" />
+    <None Remove="Assets\icon2.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\icon.ico" />
+    <Content Include="Assets\icon1.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,7 +58,8 @@
   <ItemGroup>
     <Resource Include="Assets\background.png" />
     <Resource Include="Assets\cover.png" />
-    <Resource Include="Assets\icon.ico" />
+    <Resource Include="Assets\icon2.png" />
+    <Resource Include="Assets\icon1.ico" />
     <Resource Include="Assets\icon.png" />
   </ItemGroup>
 

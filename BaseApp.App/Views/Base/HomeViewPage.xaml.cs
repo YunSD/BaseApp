@@ -1,9 +1,11 @@
 ﻿using BaseApp.Upms.Views;
 using BaseApp.ViewModels;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BaseApp.Views
 {
@@ -15,17 +17,21 @@ namespace BaseApp.Views
 
         public HomeViewModel NavigationItems { get; set; }
         public MainWindowViewModel MainWindowViewModel { get; set; }
+        public MainWindow MainWindowView { get; set; }
 
-        public HomeViewPage(IPageService pageService, INavigationService navigationService, HomeViewModel homeViewModel, MainWindowViewModel MainWindowViewModel)
+        public HomeViewPage(IPageService pageService, INavigationService navigationService, HomeViewModel homeViewModel, MainWindowViewModel MainWindowViewModel, MainWindow mainWindowView)
         {
             this.NavigationItems = homeViewModel;
             this.MainWindowViewModel = MainWindowViewModel;
+            this.MainWindowView = mainWindowView;
+
             DataContext = this;
             InitializeComponent();
             this.Loaded += OnHomePageLoaded;
 
             SetPageService(pageService);
             navigationService.SetNavigationControl(RootNavigation);
+            
         }
 
         #region INavigationWindow methods
@@ -60,5 +66,19 @@ namespace BaseApp.Views
             _ = Navigate(typeof(FolderViewPage));
         }
 
+        private void KeyboardVariant_Button_Click(object sender, RoutedEventArgs e)
+        {
+            KeyboardHelper.ShowOnScreenKeyboard();
+        }
+
+        private void Minus_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindowView.SetCurrentValue(Window.WindowStateProperty, WindowState.Minimized);
+        }
+
+        private void Close_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindowView.Close();
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace BaseApp.Upms.Views
+namespace BaseApp.Resource.Views
 {
     public partial class EmptyViewPage : Page
     {

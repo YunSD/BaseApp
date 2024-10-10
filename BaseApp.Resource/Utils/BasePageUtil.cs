@@ -1,5 +1,5 @@
 ﻿using BaseApp.Core.Utils;
-using BaseApp.Upms.Views;
+using BaseApp.Resource.Views;
 using HandyControl.Controls;
 using log4net;
 using MaterialDesignThemes.Wpf;

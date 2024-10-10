@@ -73,6 +73,8 @@ namespace BaseApp
 
                 services.AddTransientFromNamespace("BaseApp.Upms.ViewModels", Assembly.Load("BaseApp.Upms"));
                 services.AddTransientFromNamespace("BaseApp.Upms.Views", Assembly.Load("BaseApp.Upms"));
+                services.AddTransientFromNamespace("BaseApp.Resource.ViewModels", Assembly.Load("BaseApp.Resource"));
+                services.AddTransientFromNamespace("BaseApp.Resource.Views", Assembly.Load("BaseApp.Resource"));
                 services.AddTransientFromNamespace("BaseApp.Business.ViewModels", Assembly.Load("BaseApp.Business"));
                 services.AddTransientFromNamespace("BaseApp.Business.Views", Assembly.Load("BaseApp.Business"));
                 services.AddTransientFromNamespace("BaseApp.ViewModels", Assembly.GetExecutingAssembly());
